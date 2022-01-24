@@ -11,7 +11,6 @@ use CrixuAMG\Simplicate\Services\Domains\ProjectsDomain;
 
 class SimplicateService implements SimplicateServiceInterface
 {
-
     /**
      * @var SimplicateClientInterface
      */

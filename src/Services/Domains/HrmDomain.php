@@ -21,7 +21,6 @@ use CrixuAMG\Simplicate\Data\Responses\TimeTableListResponse;
 
 class HrmDomain extends AbstractDomain implements HrmDomainInterface
 {
-
     /**
      * @return string
      */
@@ -161,5 +160,4 @@ class HrmDomain extends AbstractDomain implements HrmDomainInterface
         return $this->client->responseClass(TimeTableListResponse::class)
             ->get($this->prefixPath('timetable'));
     }
-
 }

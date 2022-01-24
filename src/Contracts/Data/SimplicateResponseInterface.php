@@ -4,7 +4,6 @@ namespace CrixuAMG\Simplicate\Contracts\Data;
 
 interface SimplicateResponseInterface
 {
-
     /**
      * @return mixed
      */
@@ -15,5 +14,4 @@ interface SimplicateResponseInterface
     public function getDebug(): ?string;
 
     public function getStatusCode(): int;
-
 }

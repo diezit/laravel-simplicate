@@ -9,7 +9,6 @@ use CrixuAMG\Simplicate\Data\Responses\ServicesListResponse;
 
 class ProjectsDomain extends AbstractDomain implements ProjectsDomainInterface
 {
-
     /**
      * @return string
      */
@@ -36,5 +35,4 @@ class ProjectsDomain extends AbstractDomain implements ProjectsDomainInterface
         return $this->client->responseClass(ServiceSingleResponse::class)
             ->get($this->prefixPath('service/'.$id));
     }
-
 }

@@ -9,7 +9,6 @@ use Illuminate\Support\ServiceProvider;
 
 class SimplicateServiceProvider extends ServiceProvider
 {
-
     public function boot()
     {
         $this->bootConfig();
@@ -58,5 +57,4 @@ class SimplicateServiceProvider extends ServiceProvider
 
         return $this;
     }
-
 }

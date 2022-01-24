@@ -10,7 +10,6 @@ abstract class AbstractDomain implements SimplicateDomainInterface
 {
     use FluentPassthruToClient;
 
-
     /**
      * @var SimplicateClientInterface
      */
@@ -21,12 +20,10 @@ abstract class AbstractDomain implements SimplicateDomainInterface
      */
     protected $fluentEndpoint;
 
-
     public function __construct(SimplicateClientInterface $client)
     {
         $this->client = $client;
     }
-
 
     protected function getClient(): SimplicateClientInterface
     {
@@ -37,5 +34,4 @@ abstract class AbstractDomain implements SimplicateDomainInterface
     {
         return $this->path().'/'.$path;
     }
-
 }

@@ -11,7 +11,6 @@ use CrixuAMG\Simplicate\Data\Responses\HoursTypeSingleResponse;
 
 class HoursDomain extends AbstractDomain implements HoursDomainInterface
 {
-
     /**
      * @return string
      */
@@ -57,5 +56,4 @@ class HoursDomain extends AbstractDomain implements HoursDomainInterface
         return $this->client->responseClass(HoursTypeSingleResponse::class)
             ->get($this->prefixPath('hourstype/'.$id));
     }
-
 }

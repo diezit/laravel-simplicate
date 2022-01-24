@@ -11,7 +11,6 @@ use Psr\Http\Message\ResponseInterface;
 
 class SimplicateClient implements SimplicateClientInterface
 {
-
     /**
      * @var ClientInterface
      */
@@ -287,5 +286,4 @@ class SimplicateClient implements SimplicateClientInterface
 
         return $this;
     }
-
 }

@@ -7,7 +7,6 @@ use CrixuAMG\Simplicate\Contracts\Services\SimplicateDomainInterface;
 
 trait FluentPassthruToClient
 {
-
     /**
      * @param  int  $offset
      * @return SimplicateDomainInterface|$this
@@ -65,5 +64,4 @@ trait FluentPassthruToClient
     }
 
     abstract protected function getClient(): SimplicateClientInterface;
-
 }
