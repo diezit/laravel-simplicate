@@ -1,8 +1,8 @@
 {
-    "name": "czim/laravel-simplicate",
+    "name": "crixuamg/laravel-simplicate",
     "description": "Laravel Simplicate API Client",
     "keywords": [ "laravel", "simplicate", "api", "client" ],
-    "homepage": "https://github.com/czim",
+    "homepage": "https://github.com/crixuamg",
     "require": {
         "php": ">=7.1",
         "guzzlehttp/guzzle": "^6.3"
