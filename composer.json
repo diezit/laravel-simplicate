@@ -10,25 +10,12 @@
   "homepage": "https://github.com/crixuamg",
   "require": {
     "php": ">=7.4",
-    "guzzlehttp/guzzle": "^6.3"
-  },
-  "require-dev": {
-    "mockery/mockery": "0.9.*|~1.0",
-    "phpunit/phpunit": "~6.0|~7.0",
-    "orchestra/testbench": "~3.5|~3.6"
+    "guzzlehttp/guzzle": "^7"
   },
   "autoload": {
     "psr-4": {
       "CrixuAMG\\Simplicate\\": "src"
     }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "CrixuAMG\\Simplicate\\Test\\": "tests"
-    }
-  },
-  "scripts": {
-    "test": "phpunit"
   },
   "extra": {
     "laravel": {
