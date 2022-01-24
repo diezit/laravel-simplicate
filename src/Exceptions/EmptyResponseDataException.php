@@ -1,6 +1,6 @@
 <?php
 
-namespace Czim\Simplicate\Exceptions;
+namespace CrixuAMG\Simplicate\Exceptions;
 
 use RuntimeException;
 

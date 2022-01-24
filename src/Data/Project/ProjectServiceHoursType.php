@@ -1,8 +1,8 @@
 <?php
 
-namespace Czim\Simplicate\Data\Project;
+namespace CrixuAMG\Simplicate\Data\Project;
 
-use Czim\Simplicate\Data\AbstractDataObject;
+use CrixuAMG\Simplicate\Data\AbstractDataObject;
 use Illuminate\Support\Arr;
 
 class ProjectServiceHoursType extends AbstractDataObject
@@ -36,13 +36,23 @@ class ProjectServiceHoursType extends AbstractDataObject
 
     public function __construct(array $data)
     {
-        $this->id             = Arr::get($data, 'id');
-        $this->hoursType      = new ProjectHoursType(Arr::get($data, 'hourstype', []));
+        $this->id = Arr::get($data, 'id');
+        $this->hoursType = new ProjectHoursType(Arr::get($data, 'hourstype', []));
         $this->budgetedAmount = (int) Arr::get($data, 'budgeted_amount');
-        $this->tariff         = (float) Arr::get($data, 'tariff');
-        $this->billable       = (bool) Arr::get($data, 'billable');
+        $this->tariff = (float) Arr::get($data, 'tariff');
+        $this->billable = (bool) Arr::get($data, 'billable');
     }
 
+    public function toArray(): array
+    {
+        return [
+            'id'              => $this->getId(),
+            'hourstype'       => $this->getHoursType()->toArray(),
+            'budgeted_amount' => $this->getBudgetedAmount(),
+            'tariff'          => $this->getTariff(),
+            'billable'        => $this->isBillable(),
+        ];
+    }
 
     public function getId(): string
     {
@@ -67,18 +77,6 @@ class ProjectServiceHoursType extends AbstractDataObject
     public function isBillable(): bool
     {
         return $this->billable;
-    }
-
-
-    public function toArray(): array
-    {
-        return [
-            'id'              => $this->getId(),
-            'hourstype'       => $this->getHoursType()->toArray(),
-            'budgeted_amount' => $this->getBudgetedAmount(),
-            'tariff'          => $this->getTariff(),
-            'billable'        => $this->isBillable(),
-        ];
     }
 
 }

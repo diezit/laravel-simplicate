@@ -1,11 +1,11 @@
 <?php
 
-namespace Czim\Simplicate\Services\Domains;
+namespace CrixuAMG\Simplicate\Services\Domains;
 
-use Czim\Simplicate\Contracts\Data\SimplicateResponseInterface;
-use Czim\Simplicate\Contracts\Services\Domains\ProjectsDomainInterface;
-use Czim\Simplicate\Data\Responses\ServiceSingleResponse;
-use Czim\Simplicate\Data\Responses\ServicesListResponse;
+use CrixuAMG\Simplicate\Contracts\Data\SimplicateResponseInterface;
+use CrixuAMG\Simplicate\Contracts\Services\Domains\ProjectsDomainInterface;
+use CrixuAMG\Simplicate\Data\Responses\ServiceSingleResponse;
+use CrixuAMG\Simplicate\Data\Responses\ServicesListResponse;
 
 class ProjectsDomain extends AbstractDomain implements ProjectsDomainInterface
 {
@@ -28,13 +28,13 @@ class ProjectsDomain extends AbstractDomain implements ProjectsDomainInterface
     }
 
     /**
-     * @param string $id
+     * @param  string  $id
      * @return SimplicateResponseInterface|ServiceSingleResponse
      */
     public function service(string $id): ServiceSingleResponse
     {
         return $this->client->responseClass(ServiceSingleResponse::class)
-            ->get($this->prefixPath('service/' . $id));
+            ->get($this->prefixPath('service/'.$id));
     }
 
 }

@@ -1,17 +1,17 @@
 <?php
-namespace Czim\Simplicate\Test;
 
-use Czim\Simplicate\Providers\SimplicateServiceProvider;
+namespace CrixuAMG\Simplicate\Test;
+
+use CrixuAMG\Simplicate\Providers\SimplicateServiceProvider;
 
 abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
-
     /**
      * {@inheritdoc}
      */
     protected function getEnvironmentSetUp($app)
     {
-        $app['config']->set('simplicate', include(realpath(dirname(__DIR__) . '/config/simplicate.php')));
+        $app['config']->set('simplicate', include(realpath(dirname(__DIR__).'/config/simplicate.php')));
     }
 
     /**
@@ -23,5 +23,4 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
             SimplicateServiceProvider::class,
         ];
     }
-
 }

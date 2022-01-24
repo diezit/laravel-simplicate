@@ -1,13 +1,13 @@
 <?php
 
-namespace Czim\Simplicate\Services;
+namespace CrixuAMG\Simplicate\Services;
 
-use Czim\Simplicate\Contracts\Services\Domains;
-use Czim\Simplicate\Contracts\Services\SimplicateClientInterface;
-use Czim\Simplicate\Contracts\Services\SimplicateServiceInterface;
-use Czim\Simplicate\Services\Domains\HoursDomain;
-use Czim\Simplicate\Services\Domains\HrmDomain;
-use Czim\Simplicate\Services\Domains\ProjectsDomain;
+use CrixuAMG\Simplicate\Contracts\Services\Domains;
+use CrixuAMG\Simplicate\Contracts\Services\SimplicateClientInterface;
+use CrixuAMG\Simplicate\Contracts\Services\SimplicateServiceInterface;
+use CrixuAMG\Simplicate\Services\Domains\HoursDomain;
+use CrixuAMG\Simplicate\Services\Domains\HrmDomain;
+use CrixuAMG\Simplicate\Services\Domains\ProjectsDomain;
 
 class SimplicateService implements SimplicateServiceInterface
 {
@@ -37,8 +37,8 @@ class SimplicateService implements SimplicateServiceInterface
     {
         $this->client = $client;
 
-        $this->hours    = new HoursDomain($client);
-        $this->hrm      = new HrmDomain($client);
+        $this->hours = new HoursDomain($client);
+        $this->hrm = new HrmDomain($client);
         $this->projects = new ProjectsDomain($client);
     }
 

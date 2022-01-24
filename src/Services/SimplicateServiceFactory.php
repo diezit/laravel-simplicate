@@ -1,15 +1,14 @@
 <?php
 
-namespace Czim\Simplicate\Services;
+namespace CrixuAMG\Simplicate\Services;
 
-use Czim\Simplicate\Contracts\Services\SimplicateClientInterface;
-use Czim\Simplicate\Contracts\Services\SimplicateServiceInterface;
+use CrixuAMG\Simplicate\Contracts\Services\SimplicateClientInterface;
+use CrixuAMG\Simplicate\Contracts\Services\SimplicateServiceInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 
 class SimplicateServiceFactory
 {
-
     public function make(): SimplicateServiceInterface
     {
         return new SimplicateService($this->makeSimplicateClient());
@@ -47,5 +46,4 @@ class SimplicateServiceFactory
             config('simplicate.api.url')
         );
     }
-
 }

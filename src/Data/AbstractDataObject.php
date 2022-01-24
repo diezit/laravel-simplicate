@@ -1,6 +1,6 @@
 <?php
 
-namespace Czim\Simplicate\Data;
+namespace CrixuAMG\Simplicate\Data;
 
 use Carbon\Carbon;
 use DateTime;
@@ -11,7 +11,7 @@ abstract class AbstractDataObject implements Arrayable
 
     protected function castStringAsDate(?string $date): ?Carbon
     {
-        if ( ! $date) {
+        if (!$date) {
             return null;
         }
 
@@ -20,7 +20,7 @@ abstract class AbstractDataObject implements Arrayable
 
     protected function formatDate(?DateTime $dateTime): ?string
     {
-        if ( ! $dateTime) {
+        if (!$dateTime) {
             return null;
         }
 
@@ -29,7 +29,7 @@ abstract class AbstractDataObject implements Arrayable
 
     protected function formatDateOnly(?DateTime $dateTime): ?string
     {
-        if ( ! $dateTime) {
+        if (!$dateTime) {
             return null;
         }
 

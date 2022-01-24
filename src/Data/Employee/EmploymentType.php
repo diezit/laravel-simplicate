@@ -1,8 +1,8 @@
 <?php
 
-namespace Czim\Simplicate\Data\Employee;
+namespace CrixuAMG\Simplicate\Data\Employee;
 
-use Czim\Simplicate\Data\AbstractDataObject;
+use CrixuAMG\Simplicate\Data\AbstractDataObject;
 use Illuminate\Support\Arr;
 
 class EmploymentType extends AbstractDataObject
@@ -26,11 +26,19 @@ class EmploymentType extends AbstractDataObject
 
     public function __construct(array $data)
     {
-        $this->id      = Arr::get($data, 'id');
-        $this->name    = Arr::get($data, 'name');
+        $this->id = Arr::get($data, 'id');
+        $this->name = Arr::get($data, 'name');
         $this->blocked = (bool) Arr::get($data, 'blocked');
     }
 
+    public function toArray(): array
+    {
+        return [
+            'id'      => $this->getId(),
+            'name'    => $this->getName(),
+            'blocked' => $this->isBlocked(),
+        ];
+    }
 
     public function getId(): string
     {
@@ -45,15 +53,6 @@ class EmploymentType extends AbstractDataObject
     public function isBlocked(): bool
     {
         return $this->blocked;
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'id'      => $this->getId(),
-            'name'    => $this->getName(),
-            'blocked' => $this->isBlocked(),
-        ];
     }
 
 }

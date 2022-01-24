@@ -1,8 +1,8 @@
 <?php
 
-namespace Czim\Simplicate\Contracts\Services;
+namespace CrixuAMG\Simplicate\Contracts\Services;
 
-use Czim\Simplicate\Contracts\Data\SimplicateResponseInterface;
+use CrixuAMG\Simplicate\Contracts\Data\SimplicateResponseInterface;
 
 interface SimplicateClientInterface
 {
@@ -10,25 +10,25 @@ interface SimplicateClientInterface
     public function setAuthentication(string $key, string $secret): SimplicateClientInterface;
 
     /**
-     * @param int $offset
+     * @param  int  $offset
      * @return $this
      */
     public function offset(int $offset): SimplicateClientInterface;
 
     /**
-     * @param int $limit
+     * @param  int  $limit
      * @return $this
      */
     public function limit(int $limit): SimplicateClientInterface;
 
     /**
-     * @param array $filter
+     * @param  array  $filter
      * @return $this
      */
     public function filter(array $filter): SimplicateClientInterface;
 
     /**
-     * @param string $sort
+     * @param  string  $sort
      * @return $this
      */
     public function sort(string $sort): SimplicateClientInterface;
@@ -49,7 +49,7 @@ interface SimplicateClientInterface
     public function delete(string $path): SimplicateResponseInterface;
 
     /**
-     * @param string $class
+     * @param  string  $class
      * @return $this
      */
     public function responseClass(string $class): SimplicateClientInterface;

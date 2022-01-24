@@ -1,6 +1,6 @@
 <?php
 
-namespace Czim\Simplicate\Contracts\Services;
+namespace CrixuAMG\Simplicate\Contracts\Services;
 
 interface SimplicateServiceInterface
 {

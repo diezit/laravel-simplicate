@@ -1,9 +1,9 @@
 <?php
 
-namespace Czim\Simplicate\Data\Responses;
+namespace CrixuAMG\Simplicate\Data\Responses;
 
-use Czim\Simplicate\Contracts\Data\SimplicateResponseInterface;
-use Czim\Simplicate\Data\AbstractDataObject;
+use CrixuAMG\Simplicate\Contracts\Data\SimplicateResponseInterface;
+use CrixuAMG\Simplicate\Data\AbstractDataObject;
 use Illuminate\Contracts\Support\Arrayable;
 
 abstract class AbstractDataResponse extends AbstractDataObject implements SimplicateResponseInterface
@@ -32,31 +32,11 @@ abstract class AbstractDataResponse extends AbstractDataObject implements Simpli
 
     public function __construct($data, ?array $errors = null, ?string $debug = null, int $statusCode = 200)
     {
-        $this->errors     = $errors;
-        $this->debug      = $debug;
+        $this->errors = $errors;
+        $this->debug = $debug;
         $this->statusCode = $statusCode;
 
         $this->setData($data);
-    }
-
-    abstract protected function setData($data);
-
-    /**
-     * @return mixed
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    public function getErrors(): ?array
-    {
-        return $this->errors;
-    }
-
-    public function getDebug(): ?string
-    {
-        return $this->debug;
     }
 
     public function getStatusCode(): int
@@ -74,5 +54,25 @@ abstract class AbstractDataResponse extends AbstractDataObject implements Simpli
             'debug'  => $this->getDebug(),
         ];
     }
-    
+
+    /**
+     * @return mixed
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    abstract protected function setData($data);
+
+    public function getErrors(): ?array
+    {
+        return $this->errors;
+    }
+
+    public function getDebug(): ?string
+    {
+        return $this->debug;
+    }
+
 }

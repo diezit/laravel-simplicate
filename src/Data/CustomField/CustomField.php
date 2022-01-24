@@ -1,8 +1,8 @@
 <?php
 
-namespace Czim\Simplicate\Data\CustomField;
+namespace CrixuAMG\Simplicate\Data\CustomField;
 
-use Czim\Simplicate\Data\AbstractDataObject;
+use CrixuAMG\Simplicate\Data\AbstractDataObject;
 use Illuminate\Support\Arr;
 
 class CustomField extends AbstractDataObject
@@ -46,15 +46,27 @@ class CustomField extends AbstractDataObject
 
     public function __construct(array $data)
     {
-        $this->id         = Arr::get($data, 'id');
-        $this->name       = Arr::get($data, 'name');
-        $this->label      = Arr::get($data, 'label');
+        $this->id = Arr::get($data, 'id');
+        $this->name = Arr::get($data, 'name');
+        $this->label = Arr::get($data, 'label');
         $this->renderType = Arr::get($data, 'render_type');
-        $this->position   = (int) Arr::get($data, 'position');
-        $this->valueType  = Arr::get($data, 'valueType');
-        $this->options    = Arr::get($data, 'options', []);
+        $this->position = (int) Arr::get($data, 'position');
+        $this->valueType = Arr::get($data, 'valueType');
+        $this->options = Arr::get($data, 'options', []);
     }
 
+    public function toArray(): array
+    {
+        return [
+            'id'          => $this->getId(),
+            'name'        => $this->getName(),
+            'label'       => $this->getLabel(),
+            'render_type' => $this->getRenderType(),
+            'position'    => $this->getPosition(),
+            'value_type'  => $this->getValueType(),
+            'options'     => $this->getOptions(),
+        ];
+    }
 
     public function getId(): string
     {
@@ -89,19 +101,6 @@ class CustomField extends AbstractDataObject
     public function getOptions(): array
     {
         return $this->options;
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'id'          => $this->getId(),
-            'name'        => $this->getName(),
-            'label'       => $this->getLabel(),
-            'render_type' => $this->getRenderType(),
-            'position'    => $this->getPosition(),
-            'value_type'  => $this->getValueType(),
-            'options'     => $this->getOptions(),
-        ];
     }
 
 }

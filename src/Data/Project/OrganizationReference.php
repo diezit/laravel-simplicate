@@ -1,8 +1,8 @@
 <?php
 
-namespace Czim\Simplicate\Data\Project;
+namespace CrixuAMG\Simplicate\Data\Project;
 
-use Czim\Simplicate\Data\AbstractDataObject;
+use CrixuAMG\Simplicate\Data\AbstractDataObject;
 use Illuminate\Support\Arr;
 
 class OrganizationReference extends AbstractDataObject
@@ -21,10 +21,17 @@ class OrganizationReference extends AbstractDataObject
 
     public function __construct(array $data)
     {
-        $this->id   = Arr::get($data, 'id');
+        $this->id = Arr::get($data, 'id');
         $this->name = Arr::get($data, 'name');
     }
 
+    public function toArray(): array
+    {
+        return [
+            'id'   => $this->getId(),
+            'name' => $this->getName(),
+        ];
+    }
 
     public function getId(): string
     {
@@ -34,14 +41,6 @@ class OrganizationReference extends AbstractDataObject
     public function getName(): string
     {
         return $this->name;
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'id'   => $this->getId(),
-            'name' => $this->getName(),
-        ];
     }
 
 }

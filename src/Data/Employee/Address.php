@@ -1,8 +1,8 @@
 <?php
 
-namespace Czim\Simplicate\Data\Employee;
+namespace CrixuAMG\Simplicate\Data\Employee;
 
-use Czim\Simplicate\Data\AbstractDataObject;
+use CrixuAMG\Simplicate\Data\AbstractDataObject;
 use Illuminate\Support\Arr;
 
 class Address extends AbstractDataObject
@@ -56,17 +56,31 @@ class Address extends AbstractDataObject
 
     public function __construct(array $data)
     {
-        $this->id          = Arr::get($data, 'id');
-        $this->country     = Arr::get($data, 'country');
-        $this->type        = Arr::get($data, 'type');
-        $this->lineOne     = Arr::get($data, 'line_1');
-        $this->lineTwo     = Arr::get($data, 'line_2');
-        $this->postalCode  = Arr::get($data, 'postal_code');
-        $this->locality    = Arr::get($data, 'locality');
+        $this->id = Arr::get($data, 'id');
+        $this->country = Arr::get($data, 'country');
+        $this->type = Arr::get($data, 'type');
+        $this->lineOne = Arr::get($data, 'line_1');
+        $this->lineTwo = Arr::get($data, 'line_2');
+        $this->postalCode = Arr::get($data, 'postal_code');
+        $this->locality = Arr::get($data, 'locality');
         $this->countryCode = Arr::get($data, 'country_code');
-        $this->countryId   = Arr::get($data, 'country_id');
+        $this->countryId = Arr::get($data, 'country_id');
     }
 
+    public function toArray(): array
+    {
+        return [
+            'id'           => $this->getId(),
+            'country'      => $this->getCountry(),
+            'type'         => $this->getType(),
+            'line_1'       => $this->getLineOne(),
+            'line_2'       => $this->getLineTwo(),
+            'postal_code'  => $this->getPostalCode(),
+            'locality'     => $this->getLocality(),
+            'country_code' => $this->getCountryCode(),
+            'country_id'   => $this->getCountryId(),
+        ];
+    }
 
     public function getId(): string
     {
@@ -111,21 +125,6 @@ class Address extends AbstractDataObject
     public function getCountryId(): ?string
     {
         return $this->countryId;
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'id'           => $this->getId(),
-            'country'      => $this->getCountry(),
-            'type'         => $this->getType(),
-            'line_1'       => $this->getLineOne(),
-            'line_2'       => $this->getLineTwo(),
-            'postal_code'  => $this->getPostalCode(),
-            'locality'     => $this->getLocality(),
-            'country_code' => $this->getCountryCode(),
-            'country_id'   => $this->getCountryId(),
-        ];
     }
 
 }

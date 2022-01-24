@@ -1,13 +1,13 @@
 <?php
 
-namespace Czim\Simplicate\Services\Domains;
+namespace CrixuAMG\Simplicate\Services\Domains;
 
-use Czim\Simplicate\Contracts\Data\SimplicateResponseInterface;
-use Czim\Simplicate\Contracts\Services\Domains\HoursDomainInterface;
-use Czim\Simplicate\Data\Responses\HoursListResponse;
-use Czim\Simplicate\Data\Responses\HoursSingleResponse;
-use Czim\Simplicate\Data\Responses\HoursTypeListResponse;
-use Czim\Simplicate\Data\Responses\HoursTypeSingleResponse;
+use CrixuAMG\Simplicate\Contracts\Data\SimplicateResponseInterface;
+use CrixuAMG\Simplicate\Contracts\Services\Domains\HoursDomainInterface;
+use CrixuAMG\Simplicate\Data\Responses\HoursListResponse;
+use CrixuAMG\Simplicate\Data\Responses\HoursSingleResponse;
+use CrixuAMG\Simplicate\Data\Responses\HoursTypeListResponse;
+use CrixuAMG\Simplicate\Data\Responses\HoursTypeSingleResponse;
 
 class HoursDomain extends AbstractDomain implements HoursDomainInterface
 {
@@ -30,13 +30,13 @@ class HoursDomain extends AbstractDomain implements HoursDomainInterface
     }
 
     /**
-     * @param string $id
+     * @param  string  $id
      * @return SimplicateResponseInterface|HoursSingleResponse
      */
     public function hours(string $id): HoursSingleResponse
     {
         return $this->client->responseClass(HoursSingleResponse::class)
-            ->get($this->prefixPath('hours/' . $id));
+            ->get($this->prefixPath('hours/'.$id));
     }
 
     /**
@@ -49,13 +49,13 @@ class HoursDomain extends AbstractDomain implements HoursDomainInterface
     }
 
     /**
-     * @param string $id
+     * @param  string  $id
      * @return SimplicateResponseInterface|HoursTypeSingleResponse
      */
     public function hoursType(string $id): HoursTypeSingleResponse
     {
         return $this->client->responseClass(HoursTypeSingleResponse::class)
-            ->get($this->prefixPath('hourstype/' . $id));
+            ->get($this->prefixPath('hourstype/'.$id));
     }
 
 }

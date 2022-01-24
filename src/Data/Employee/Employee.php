@@ -1,9 +1,9 @@
 <?php
 
-namespace Czim\Simplicate\Data\Employee;
+namespace CrixuAMG\Simplicate\Data\Employee;
 
 use Carbon\Carbon;
-use Czim\Simplicate\Data\AbstractDataObject;
+use CrixuAMG\Simplicate\Data\AbstractDataObject;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
@@ -123,33 +123,71 @@ class Employee extends AbstractDataObject
 
     public function __construct(array $data)
     {
-        $this->id                = Arr::get($data, 'id');
-        $this->isUser            = (bool) Arr::get($data, 'is_user');
-        $this->teams             = new Collection(
+        $this->id = Arr::get($data, 'id');
+        $this->isUser = (bool) Arr::get($data, 'is_user');
+        $this->teams = new Collection(
             array_map(function (array $data) {
                 return new TeamReference($data);
             },
-            Arr::get($data, 'teams', []))
+                Arr::get($data, 'teams', []))
         );
-        $this->supervisor        = new EmployeeReference(Arr::get($data, 'supervisor', []));
-        $this->person            = new Person(Arr::get($data, 'person', []));
-        $this->status            = new Status(Arr::get($data, 'status', []));
-        $this->personId          = Arr::get($data, 'person_id');
-        $this->name              = Arr::get($data, 'name');
-        $this->function          = Arr::get($data, 'function');
-        $this->type              = new Type(Arr::get($data, 'type', []));
-        $this->employmentStatus  = Arr::get($data, 'employment_status');
-        $this->workPhone         = Arr::get($data, 'work_phone');
-        $this->workMobile        = Arr::get($data, 'work_mobile');
-        $this->workEmail         = Arr::get($data, 'work_email');
+        $this->supervisor = new EmployeeReference(Arr::get($data, 'supervisor', []));
+        $this->person = new Person(Arr::get($data, 'person', []));
+        $this->status = new Status(Arr::get($data, 'status', []));
+        $this->personId = Arr::get($data, 'person_id');
+        $this->name = Arr::get($data, 'name');
+        $this->function = Arr::get($data, 'function');
+        $this->type = new Type(Arr::get($data, 'type', []));
+        $this->employmentStatus = Arr::get($data, 'employment_status');
+        $this->workPhone = Arr::get($data, 'work_phone');
+        $this->workMobile = Arr::get($data, 'work_mobile');
+        $this->workEmail = Arr::get($data, 'work_email');
         $this->hourlySalesTariff = (float) Arr::get($data, 'hourly_sales_tariff');
-        $this->hourlyCostTariff  = (float) Arr::get($data, 'hourly_cost_tariff');
-        $this->avatar            = new Avatar(Arr::get($data, 'avatar', []));
-        $this->created           = $this->castStringAsDate(Arr::get($data, 'created'));
-        $this->createdAt         = $this->castStringAsDate(Arr::get($data, 'created_at'));
-        $this->modified          = $this->castStringAsDate(Arr::get($data, 'modified'));
-        $this->updatedAt         = $this->castStringAsDate(Arr::get($data, 'updated_at'));
-        $this->simplicateUrl     = Arr::get($data, 'simplicate_url');
+        $this->hourlyCostTariff = (float) Arr::get($data, 'hourly_cost_tariff');
+        $this->avatar = new Avatar(Arr::get($data, 'avatar', []));
+        $this->created = $this->castStringAsDate(Arr::get($data, 'created'));
+        $this->createdAt = $this->castStringAsDate(Arr::get($data, 'created_at'));
+        $this->modified = $this->castStringAsDate(Arr::get($data, 'modified'));
+        $this->updatedAt = $this->castStringAsDate(Arr::get($data, 'updated_at'));
+        $this->simplicateUrl = Arr::get($data, 'simplicate_url');
+    }
+
+    public function getModified(): ?Carbon
+    {
+        return $this->modified;
+    }
+
+    public function getUpdatedAt(): ?Carbon
+    {
+        return $this->updatedAt;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'id'                  => $this->getId(),
+            'is_user'             => $this->isUser(),
+            'teams'               => $this->getTeams()->toArray(),
+            'supervisor'          => $this->getSupervisor()->toArray(),
+            'person'              => $this->getPerson()->toArray(),
+            'status'              => $this->getStatus()->toArray(),
+            'person_id'           => $this->getPersonId(),
+            'name'                => $this->getName(),
+            'function'            => $this->getFunction(),
+            'type'                => $this->getType()->toArray(),
+            'employment_status'   => $this->getEmploymentStatus(),
+            'work_phone'          => $this->getWorkPhone(),
+            'work_mobile'         => $this->getWorkMobile(),
+            'work_email'          => $this->getWorkEmail(),
+            'hourly_sales_tariff' => $this->getHourlySalesTariff(),
+            'hourly_cost_tariff'  => $this->getHourlyCostTariff(),
+            'avatar'              => $this->getAvatar()->toArray(),
+            'created'             => $this->formatDate($this->getCreated()),
+            'created_at'          => $this->formatDate($this->getCreatedAt()),
+            'modified'            => $this->formatDate($this->getCreated()),
+            'updated_at'          => $this->formatDate($this->getCreatedAt()),
+            'simplicate_url'      => $this->getSimplicateUrl(),
+        ];
     }
 
     public function getId(): string
@@ -253,47 +291,9 @@ class Employee extends AbstractDataObject
         return $this->createdAt;
     }
 
-    public function getModified(): ?Carbon
-    {
-        return $this->modified;
-    }
-
-    public function getUpdatedAt(): ?Carbon
-    {
-        return $this->updatedAt;
-    }
-
     public function getSimplicateUrl(): string
     {
         return $this->simplicateUrl;
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'id'                  => $this->getId(),
-            'is_user'             => $this->isUser(),
-            'teams'               => $this->getTeams()->toArray(),
-            'supervisor'          => $this->getSupervisor()->toArray(),
-            'person'              => $this->getPerson()->toArray(),
-            'status'              => $this->getStatus()->toArray(),
-            'person_id'           => $this->getPersonId(),
-            'name'                => $this->getName(),
-            'function'            => $this->getFunction(),
-            'type'                => $this->getType()->toArray(),
-            'employment_status'   => $this->getEmploymentStatus(),
-            'work_phone'          => $this->getWorkPhone(),
-            'work_mobile'         => $this->getWorkMobile(),
-            'work_email'          => $this->getWorkEmail(),
-            'hourly_sales_tariff' => $this->getHourlySalesTariff(),
-            'hourly_cost_tariff'  => $this->getHourlyCostTariff(),
-            'avatar'              => $this->getAvatar()->toArray(),
-            'created'             => $this->formatDate($this->getCreated()),
-            'created_at'          => $this->formatDate($this->getCreatedAt()),
-            'modified'            => $this->formatDate($this->getCreated()),
-            'updated_at'          => $this->formatDate($this->getCreatedAt()),
-            'simplicate_url'      => $this->getSimplicateUrl(),
-        ];
     }
 
 }

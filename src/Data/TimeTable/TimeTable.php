@@ -1,10 +1,10 @@
 <?php
 
-namespace Czim\Simplicate\Data\TimeTable;
+namespace CrixuAMG\Simplicate\Data\TimeTable;
 
 use Carbon\Carbon;
-use Czim\Simplicate\Data\AbstractDataObject;
-use Czim\Simplicate\Data\Employee\EmployeeReference;
+use CrixuAMG\Simplicate\Data\AbstractDataObject;
+use CrixuAMG\Simplicate\Data\Employee\EmployeeReference;
 use Illuminate\Support\Arr;
 
 class TimeTable extends AbstractDataObject
@@ -46,18 +46,29 @@ class TimeTable extends AbstractDataObject
     protected $endDate;
 
 
-
     public function __construct(array $data)
     {
-        $this->employee          = new EmployeeReference(Arr::get($data, 'employee', []));
+        $this->employee = new EmployeeReference(Arr::get($data, 'employee', []));
         $this->hourlySalesTariff = (float) Arr::get($data, 'hourly_sales_tariff');
-        $this->hourlyCostTariff  = (float) Arr::get($data, 'hourly_cost_tariff');
-        $this->evenWeek          = new TimeTableWeek(Arr::get($data, 'even_week', []));
-        $this->oddWeek           = new TimeTableWeek(Arr::get($data, 'odd_week', []));
-        $this->startDate         = $this->castStringAsDate(Arr::get($data, 'start_date'));
-        $this->endDate           = $this->castStringAsDate(Arr::get($data, 'end_date'));
+        $this->hourlyCostTariff = (float) Arr::get($data, 'hourly_cost_tariff');
+        $this->evenWeek = new TimeTableWeek(Arr::get($data, 'even_week', []));
+        $this->oddWeek = new TimeTableWeek(Arr::get($data, 'odd_week', []));
+        $this->startDate = $this->castStringAsDate(Arr::get($data, 'start_date'));
+        $this->endDate = $this->castStringAsDate(Arr::get($data, 'end_date'));
     }
 
+    public function toArray(): array
+    {
+        return [
+            'employee'            => $this->getEmployee()->toArray(),
+            'hourly_sales_tariff' => $this->getHourlySalesTariff(),
+            'hourly_cost_tariff'  => $this->getHourlyCostTariff(),
+            'even_week'           => $this->getEvenWeek()->toArray(),
+            'odd_week'            => $this->getOddWeek()->toArray(),
+            'start_date'          => $this->formatDate($this->getStartDate()),
+            'end_date'            => $this->formatDate($this->getEndDate()),
+        ];
+    }
 
     public function getEmployee(): EmployeeReference
     {
@@ -92,20 +103,6 @@ class TimeTable extends AbstractDataObject
     public function getEndDate(): ?Carbon
     {
         return $this->endDate;
-    }
-
-
-    public function toArray(): array
-    {
-        return [
-            'employee'            => $this->getEmployee()->toArray(),
-            'hourly_sales_tariff' => $this->getHourlySalesTariff(),
-            'hourly_cost_tariff'  => $this->getHourlyCostTariff(),
-            'even_week'           => $this->getEvenWeek()->toArray(),
-            'odd_week'            => $this->getOddWeek()->toArray(),
-            'start_date'          => $this->formatDate($this->getStartDate()),
-            'end_date'            => $this->formatDate($this->getEndDate()),
-        ];
     }
 
 }

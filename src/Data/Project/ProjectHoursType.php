@@ -1,8 +1,8 @@
 <?php
 
-namespace Czim\Simplicate\Data\Project;
+namespace CrixuAMG\Simplicate\Data\Project;
 
-use Czim\Simplicate\Data\AbstractDataObject;
+use CrixuAMG\Simplicate\Data\AbstractDataObject;
 use Illuminate\Support\Arr;
 
 /**
@@ -41,13 +41,23 @@ class ProjectHoursType extends AbstractDataObject
 
     public function __construct(array $data)
     {
-        $this->id      = Arr::get($data, 'id');
-        $this->type    = Arr::get($data, 'type');
-        $this->label   = Arr::get($data, 'label');
+        $this->id = Arr::get($data, 'id');
+        $this->type = Arr::get($data, 'type');
+        $this->label = Arr::get($data, 'label');
         $this->blocked = (bool) Arr::get($data, 'blocked');
-        $this->color   = Arr::get($data, 'color');
+        $this->color = Arr::get($data, 'color');
     }
 
+    public function toArray(): array
+    {
+        return [
+            'ip'      => $this->getId(),
+            'type'    => $this->getType(),
+            'label'   => $this->getLabel(),
+            'blocked' => $this->isBlocked(),
+            'color'   => $this->getColor(),
+        ];
+    }
 
     public function getId(): string
     {
@@ -72,17 +82,6 @@ class ProjectHoursType extends AbstractDataObject
     public function getColor(): ?string
     {
         return $this->color;
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'ip'      => $this->getId(),
-            'type'    => $this->getType(),
-            'label'   => $this->getLabel(),
-            'blocked' => $this->isBlocked(),
-            'color'   => $this->getColor(),
-        ];
     }
 
 }

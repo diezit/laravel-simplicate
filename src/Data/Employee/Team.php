@@ -1,6 +1,6 @@
 <?php
 
-namespace Czim\Simplicate\Data\Employee;
+namespace CrixuAMG\Simplicate\Data\Employee;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -28,6 +28,12 @@ class Team extends TeamReference
         );
     }
 
+    public function toArray(): array
+    {
+        return array_merge(parent::toArray(), [
+            'employees' => $this->getEmployees()->toArray(),
+        ]);
+    }
 
     /**
      * @return Collection|EmployeeReference[]
@@ -35,13 +41,6 @@ class Team extends TeamReference
     public function getEmployees(): Collection
     {
         return $this->employees;
-    }
-
-    public function toArray(): array
-    {
-        return array_merge(parent::toArray(), [
-            'employees'   => $this->getEmployees()->toArray(),
-        ]);
     }
 
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Czim\Simplicate\Data\Employee;
+namespace CrixuAMG\Simplicate\Data\Employee;
 
-use Czim\Simplicate\Data\AbstractDataObject;
+use CrixuAMG\Simplicate\Data\AbstractDataObject;
 use Illuminate\Support\Arr;
 
 class Status extends AbstractDataObject
@@ -21,10 +21,17 @@ class Status extends AbstractDataObject
 
     public function __construct(array $data)
     {
-        $this->id    = Arr::get($data, 'id');
+        $this->id = Arr::get($data, 'id');
         $this->label = Arr::get($data, 'label');
     }
 
+    public function toArray(): array
+    {
+        return [
+            'id'    => $this->getId(),
+            'label' => $this->getLabel(),
+        ];
+    }
 
     public function getId(): string
     {
@@ -34,14 +41,6 @@ class Status extends AbstractDataObject
     public function getLabel(): string
     {
         return $this->label;
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'id'    => $this->getId(),
-            'label' => $this->getLabel(),
-        ];
     }
 
 }

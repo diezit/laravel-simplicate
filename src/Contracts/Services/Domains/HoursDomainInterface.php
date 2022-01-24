@@ -1,12 +1,12 @@
 <?php
 
-namespace Czim\Simplicate\Contracts\Services\Domains;
+namespace CrixuAMG\Simplicate\Contracts\Services\Domains;
 
-use Czim\Simplicate\Contracts\Services\SimplicateDomainInterface;
-use Czim\Simplicate\Data\Responses\HoursListResponse;
-use Czim\Simplicate\Data\Responses\HoursSingleResponse;
-use Czim\Simplicate\Data\Responses\HoursTypeListResponse;
-use Czim\Simplicate\Data\Responses\HoursTypeSingleResponse;
+use CrixuAMG\Simplicate\Contracts\Services\SimplicateDomainInterface;
+use CrixuAMG\Simplicate\Data\Responses\HoursListResponse;
+use CrixuAMG\Simplicate\Data\Responses\HoursSingleResponse;
+use CrixuAMG\Simplicate\Data\Responses\HoursTypeListResponse;
+use CrixuAMG\Simplicate\Data\Responses\HoursTypeSingleResponse;
 
 interface HoursDomainInterface extends SimplicateDomainInterface
 {

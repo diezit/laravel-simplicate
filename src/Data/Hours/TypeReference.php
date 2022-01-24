@@ -1,8 +1,8 @@
 <?php
 
-namespace Czim\Simplicate\Data\Hours;
+namespace CrixuAMG\Simplicate\Data\Hours;
 
-use Czim\Simplicate\Data\AbstractDataObject;
+use CrixuAMG\Simplicate\Data\AbstractDataObject;
 use Illuminate\Support\Arr;
 
 class TypeReference extends AbstractDataObject
@@ -36,13 +36,23 @@ class TypeReference extends AbstractDataObject
 
     public function __construct(array $data)
     {
-        $this->id       = Arr::get($data, 'id');
-        $this->type     = Arr::get($data, 'type');
+        $this->id = Arr::get($data, 'id');
+        $this->type = Arr::get($data, 'type');
         $this->vatClass = new VatClass(Arr::get($data, 'vatclass', []));
-        $this->label    = Arr::get($data, 'label');
-        $this->tariff   = Arr::has($data, 'tariff') ? (float) Arr::get($data, 'tariff') : null;
+        $this->label = Arr::get($data, 'label');
+        $this->tariff = Arr::has($data, 'tariff') ? (float) Arr::get($data, 'tariff') : null;
     }
 
+    public function toArray(): array
+    {
+        return [
+            'id'       => $this->getId(),
+            'type'     => $this->getType(),
+            'vatclass' => $this->getVatClass()->toArray(),
+            'label'    => $this->getLabel(),
+            'tariff'   => $this->getTariff(),
+        ];
+    }
 
     public function getId(): string
     {
@@ -67,17 +77,6 @@ class TypeReference extends AbstractDataObject
     public function getTariff(): ?float
     {
         return $this->tariff;
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'id'       => $this->getId(),
-            'type'     => $this->getType(),
-            'vatclass' => $this->getVatClass()->toArray(),
-            'label'    => $this->getLabel(),
-            'tariff'   => $this->getTariff(),
-        ];
     }
 
 }

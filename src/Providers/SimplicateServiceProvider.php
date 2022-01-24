@@ -1,8 +1,9 @@
 <?php
-namespace Czim\Simplicate\Providers;
 
-use Czim\Simplicate\Contracts\Services\SimplicateServiceInterface;
-use Czim\Simplicate\Services\SimplicateServiceFactory;
+namespace CrixuAMG\Simplicate\Providers;
+
+use CrixuAMG\Simplicate\Contracts\Services\SimplicateServiceInterface;
+use CrixuAMG\Simplicate\Services\SimplicateServiceFactory;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,23 +15,22 @@ class SimplicateServiceProvider extends ServiceProvider
         $this->bootConfig();
     }
 
-    public function register()
-    {
-        $this->registerConfig()
-             ->registerInterfaceBindings();
-    }
-
     /**
      * @return $this
      */
-    protected function registerConfig()
+    protected function bootConfig()
     {
-        $this->mergeConfigFrom(
-            realpath(dirname(__DIR__) . '/../config/simplicate.php'),
-            'simplicate'
-        );
+        $this->publishes([
+            realpath(dirname(__DIR__).'/../config/simplicate.php') => config_path('simplicate.php'),
+        ]);
 
         return $this;
+    }
+
+    public function register()
+    {
+        $this->registerConfig()
+            ->registerInterfaceBindings();
     }
 
     /**
@@ -49,11 +49,12 @@ class SimplicateServiceProvider extends ServiceProvider
     /**
      * @return $this
      */
-    protected function bootConfig()
+    protected function registerConfig()
     {
-        $this->publishes([
-            realpath(dirname(__DIR__) . '/../config/simplicate.php') => config_path('simplicate.php'),
-        ]);
+        $this->mergeConfigFrom(
+            realpath(dirname(__DIR__).'/../config/simplicate.php'),
+            'simplicate'
+        );
 
         return $this;
     }

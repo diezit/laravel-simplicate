@@ -1,10 +1,10 @@
 <?php
 
-namespace Czim\Simplicate\Contracts\Services\Domains;
+namespace CrixuAMG\Simplicate\Contracts\Services\Domains;
 
-use Czim\Simplicate\Contracts\Services\SimplicateDomainInterface;
-use Czim\Simplicate\Data\Responses\ServiceSingleResponse;
-use Czim\Simplicate\Data\Responses\ServicesListResponse;
+use CrixuAMG\Simplicate\Contracts\Services\SimplicateDomainInterface;
+use CrixuAMG\Simplicate\Data\Responses\ServiceSingleResponse;
+use CrixuAMG\Simplicate\Data\Responses\ServicesListResponse;
 
 interface ProjectsDomainInterface extends SimplicateDomainInterface
 {

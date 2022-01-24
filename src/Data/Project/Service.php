@@ -1,10 +1,10 @@
 <?php
 
-namespace Czim\Simplicate\Data\Project;
+namespace CrixuAMG\Simplicate\Data\Project;
 
 use Carbon\Carbon;
-use Czim\Simplicate\Data\AbstractDataObject;
-use Czim\Simplicate\Data\Hours\VatClass;
+use CrixuAMG\Simplicate\Data\AbstractDataObject;
+use CrixuAMG\Simplicate\Data\Hours\VatClass;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
@@ -99,44 +99,66 @@ class Service extends AbstractDataObject
 
     public function __construct(array $data)
     {
-        $this->id                    = Arr::get($data, 'id');
-        $this->projectId             = Arr::get($data, 'project_id');
-        $this->invoiceDate           = $this->castStringAsDate(Arr::get($data, 'invoice_date'));
-        $this->status                = Arr::get($data, 'status');
-        $this->hoursTypes            = new Collection(
+        $this->id = Arr::get($data, 'id');
+        $this->projectId = Arr::get($data, 'project_id');
+        $this->invoiceDate = $this->castStringAsDate(Arr::get($data, 'invoice_date'));
+        $this->status = Arr::get($data, 'status');
+        $this->hoursTypes = new Collection(
             array_map(function (array $data) {
                 return new ProjectServiceHoursType($data);
             },
                 Arr::get($data, 'hour_types', []))
         );
-        $this->vatClass              = new VatClass(Arr::get($data, 'vat_class'));
-        $this->revenueGroup          = new RevenueGroupReference(Arr::get($data, 'revenue_group', []));
+        $this->vatClass = new VatClass(Arr::get($data, 'vat_class'));
+        $this->revenueGroup = new RevenueGroupReference(Arr::get($data, 'revenue_group', []));
         $this->invoiceInInstallments = (bool) Arr::get($data, 'invoice_in_installments');
-        $this->createdAt             = $this->castStringAsDate(Arr::get($data, 'created_at'));
-        $this->updatedAt             = $this->castStringAsDate(Arr::get($data, 'updated_at'));
-        $this->writeHoursStartDate   = $this->castStringAsDate(Arr::get($data, 'write_hours_start_date'));
-        $this->startDate             = $this->castStringAsDate(Arr::get($data, 'start_date'));
-        $this->name                  = Arr::get($data, 'name');
-        $this->invoiceMethod         = Arr::get($data, 'invoice_method');
-        $this->amount                = (float) Arr::get($data, 'amount');
-        $this->trackHours            = (bool) Arr::get($data, 'track_hours');
-        $this->trackCost             = (bool) Arr::get($data, 'track_cost');
+        $this->createdAt = $this->castStringAsDate(Arr::get($data, 'created_at'));
+        $this->updatedAt = $this->castStringAsDate(Arr::get($data, 'updated_at'));
+        $this->writeHoursStartDate = $this->castStringAsDate(Arr::get($data, 'write_hours_start_date'));
+        $this->startDate = $this->castStringAsDate(Arr::get($data, 'start_date'));
+        $this->name = Arr::get($data, 'name');
+        $this->invoiceMethod = Arr::get($data, 'invoice_method');
+        $this->amount = (float) Arr::get($data, 'amount');
+        $this->trackHours = (bool) Arr::get($data, 'track_hours');
+        $this->trackCost = (bool) Arr::get($data, 'track_cost');
     }
 
+    public function toArray(): array
+    {
+        return [
+            'id'                      => $this->getId(),
+            'project_id'              => $this->getProjectId(),
+            'invoice_date'            => $this->formatDate($this->getInvoiceDate()),
+            'status'                  => $this->getStatus(),
+            'hour_types'              => $this->getHoursTypes()->toArray(),
+            'vat_class'               => $this->getVatClass()->toArray(),
+            'revenue_group'           => $this->getRevenueGroup()->toArray(),
+            'invoice_in_installments' => $this->isInvoiceInInstallments(),
+            'created_at'              => $this->formatDate($this->getCreatedAt()),
+            'updated_at'              => $this->formatDate($this->getUpdatedAt()),
+            'write_hours_start_date'  => $this->formatDateOnly($this->getWriteHoursStartDate()),
+            'start_date'              => $this->formatDateOnly($this->getStartDate()),
+            'name'                    => $this->getName(),
+            'invoice_method'          => $this->getInvoiceMethod(),
+            'amount'                  => $this->getAmount(),
+            'track_hours'             => $this->isTrackHours(),
+            'track_cost'              => $this->isTrackCost(),
+        ];
+    }
 
     public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function getInvoiceDate(): ?Carbon
-    {
-        return $this->invoiceDate;
-    }
-
     public function getProjectId(): string
     {
         return $this->projectId;
+    }
+
+    public function getInvoiceDate(): ?Carbon
+    {
+        return $this->invoiceDate;
     }
 
     public function getStatus(): string
@@ -210,30 +232,6 @@ class Service extends AbstractDataObject
     public function isTrackCost(): bool
     {
         return $this->trackCost;
-    }
-
-
-    public function toArray(): array
-    {
-        return [
-            'id'                      => $this->getId(),
-            'project_id'              => $this->getProjectId(),
-            'invoice_date'            => $this->formatDate($this->getInvoiceDate()),
-            'status'                  => $this->getStatus(),
-            'hour_types'              => $this->getHoursTypes()->toArray(),
-            'vat_class'               => $this->getVatClass()->toArray(),
-            'revenue_group'           => $this->getRevenueGroup()->toArray(),
-            'invoice_in_installments' => $this->isInvoiceInInstallments(),
-            'created_at'              => $this->formatDate($this->getCreatedAt()),
-            'updated_at'              => $this->formatDate($this->getUpdatedAt()),
-            'write_hours_start_date'  => $this->formatDateOnly($this->getWriteHoursStartDate()),
-            'start_date'              => $this->formatDateOnly($this->getStartDate()),
-            'name'                    => $this->getName(),
-            'invoice_method'          => $this->getInvoiceMethod(),
-            'amount'                  => $this->getAmount(),
-            'track_hours'             => $this->isTrackHours(),
-            'track_cost'              => $this->isTrackCost(),
-        ];
     }
 
 }

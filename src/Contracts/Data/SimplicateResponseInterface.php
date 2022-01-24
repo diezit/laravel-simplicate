@@ -1,6 +1,6 @@
 <?php
 
-namespace Czim\Simplicate\Contracts\Data;
+namespace CrixuAMG\Simplicate\Contracts\Data;
 
 interface SimplicateResponseInterface
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Czim\Simplicate\Data\Employee;
+namespace CrixuAMG\Simplicate\Data\Employee;
 
 use Carbon\Carbon;
-use Czim\Simplicate\Data\AbstractDataObject;
+use CrixuAMG\Simplicate\Data\AbstractDataObject;
 use Illuminate\Support\Arr;
 
 class Person extends AbstractDataObject
@@ -56,23 +56,35 @@ class Person extends AbstractDataObject
             if ($dateOfBirth == '0000-00-00') {
                 $dateOfBirth = null;
             } elseif (preg_match('#^-?0000(.*)$#', $dateOfBirth, $matches)) {
-                $dateOfBirth = '1900' . $matches[1];
+                $dateOfBirth = '1900'.$matches[1];
             }
         }
 
 
-        $this->id          = Arr::get($data, 'id');
+        $this->id = Arr::get($data, 'id');
         $this->dateOfBirth = $dateOfBirth ? new Carbon($dateOfBirth) : null;
-        $this->genderId    = Arr::get($data, 'gender_id');
-        $this->gender      = Arr::get($data, 'gender');
-        $this->address     = new Address(Arr::get($data, 'address', []));
-        $this->fullName    = Arr::get($data, 'full_name');
+        $this->genderId = Arr::get($data, 'gender_id');
+        $this->gender = Arr::get($data, 'gender');
+        $this->address = new Address(Arr::get($data, 'address', []));
+        $this->fullName = Arr::get($data, 'full_name');
     }
 
-
-    public function getId(): string
+    public function toArray(): array
     {
-        return $this->id;
+        $dateOfBirth = $this->formatDate($this->getDateOfBirth());
+
+        if ($dateOfBirth !== null && !$this->isDateOfBirthYearGiven()) {
+            $dateOfBirth = '0000'.substr($dateOfBirth, 4);
+        }
+
+        return [
+            'id'            => $this->getId(),
+            'date_of_birth' => $dateOfBirth,
+            'gender_id'     => $this->getGenderId(),
+            'gender'        => $this->getGender(),
+            'address'       => $this->getAddress()->toArray(),
+            'full_name'     => $this->getFullName(),
+        ];
     }
 
     public function getDateOfBirth(): ?Carbon
@@ -83,6 +95,11 @@ class Person extends AbstractDataObject
     public function isDateOfBirthYearGiven(): bool
     {
         return $this->dateOfBirthHasYear;
+    }
+
+    public function getId(): string
+    {
+        return $this->id;
     }
 
     public function getGenderId(): string
@@ -103,24 +120,6 @@ class Person extends AbstractDataObject
     public function getFullName(): string
     {
         return $this->fullName;
-    }
-
-    public function toArray(): array
-    {
-        $dateOfBirth = $this->formatDate($this->getDateOfBirth());
-
-        if ($dateOfBirth !== null && ! $this->isDateOfBirthYearGiven()) {
-            $dateOfBirth = '0000' . substr($dateOfBirth, 4);
-        }
-
-        return [
-            'id'            => $this->getId(),
-            'date_of_birth' => $dateOfBirth,
-            'gender_id'     => $this->getGenderId(),
-            'gender'        => $this->getGender(),
-            'address'       => $this->getAddress()->toArray(),
-            'full_name'     => $this->getFullName(),
-        ];
     }
 
 }

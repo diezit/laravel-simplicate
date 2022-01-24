@@ -1,8 +1,8 @@
 <?php
 
-namespace Czim\Simplicate\Data\Responses;
+namespace CrixuAMG\Simplicate\Data\Responses;
 
-use Czim\Simplicate\Data\Employee\Team;
+use CrixuAMG\Simplicate\Data\Employee\Team;
 
 /**
  * Class TeamSingleResponse

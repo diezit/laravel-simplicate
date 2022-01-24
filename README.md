@@ -4,21 +4,18 @@ For communicating with the Simplicate API.
 
 W.I.P.
 
-
 ## Version Compatibility
 
- Laravel             | Package 
+Laravel             | Package
 :--------------------|:--------
- 5.3.x and older     | 0.9.x
-
-
+5.3.x and older     | 0.9.x
 
 ## Installation
 
 Via Composer:
 
 ``` bash
-$ composer require czim/laravel-simplicate
+$ composer require CrixuAMG/laravel-simplicate
 ```
 
 If you don't use auto-discover, register the Service Provider in your `config/app.php`:
@@ -27,15 +24,14 @@ If you don't use auto-discover, register the Service Provider in your `config/ap
 <?php
     'providers' => [
         // ...
-        Czim\Simplicate\Providers\SimplicateServiceProvider::class,
+        CrixuAMG\Simplicate\Providers\SimplicateServiceProvider::class,
     ],
 ```
-
 
 Publish the configuration file:
 
 ``` bash
-php artisan vendor:publish --provider="Czim\Simplicate\Providers\SimplicateServiceProvider"
+php artisan vendor:publish --provider="CrixuAMG\Simplicate\Providers\SimplicateServiceProvider"
 ```
 
 ## Configuration
@@ -58,7 +54,7 @@ For filterable, orderable listings, you can use fluent syntax to set parameters:
 
 ```php
 <?php
-/** @var \Czim\Simplicate\Services\SimplicateService $service */
+/** @var \CrixuAMG\Simplicate\Services\SimplicateService $service */
 $leaveRecords = $service->hrm()
     ->offset(2)
     ->limit(10)
@@ -67,11 +63,9 @@ $leaveRecords = $service->hrm()
     ->allLeave();
 ```
 
-
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
 
 ## Credits
 
@@ -81,11 +75,16 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/czim/laravel-simplicate.svg?style=flat-square
-[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/czim/laravel-simplicate.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/CrixuAMG/laravel-simplicate.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/czim/laravel-simplicate
-[link-downloads]: https://packagist.org/packages/czim/laravel-simplicate
-[link-author]: https://github.com/czim
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+
+[ico-downloads]: https://img.shields.io/packagist/dt/CrixuAMG/laravel-simplicate.svg?style=flat-square
+
+[link-packagist]: https://packagist.org/packages/CrixuAMG/laravel-simplicate
+
+[link-downloads]: https://packagist.org/packages/CrixuAMG/laravel-simplicate
+
+[link-author]: https://github.com/CrixuAMG
+
 [link-contributors]: ../../contributors

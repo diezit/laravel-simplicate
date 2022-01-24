@@ -1,8 +1,8 @@
 <?php
 
-namespace Czim\Simplicate\Data\Responses;
+namespace CrixuAMG\Simplicate\Data\Responses;
 
-use Czim\Simplicate\Data\Employee\EmploymentType;
+use CrixuAMG\Simplicate\Data\Employee\EmploymentType;
 use Illuminate\Support\Collection;
 
 /**

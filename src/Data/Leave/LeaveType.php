@@ -1,6 +1,6 @@
 <?php
 
-namespace Czim\Simplicate\Data\Leave;
+namespace CrixuAMG\Simplicate\Data\Leave;
 
 use Illuminate\Support\Arr;
 
@@ -23,9 +23,16 @@ class LeaveType extends LeaveTypeReference
         parent::__construct($data);
 
         $this->blocked = (bool) Arr::get($data, 'blocked');
-        $this->color   = Arr::get($data, 'color');
+        $this->color = Arr::get($data, 'color');
     }
 
+    public function toArray(): array
+    {
+        return array_merge(parent::toArray(), [
+            'blocked' => $this->isBlocked(),
+            'color'   => $this->getColor(),
+        ]);
+    }
 
     public function isBlocked(): bool
     {
@@ -35,14 +42,6 @@ class LeaveType extends LeaveTypeReference
     public function getColor(): ?string
     {
         return $this->color;
-    }
-
-    public function toArray(): array
-    {
-        return array_merge(parent::toArray(), [
-            'blocked' => $this->isBlocked(),
-            'color'   => $this->getColor(),
-        ]);
     }
 
 }

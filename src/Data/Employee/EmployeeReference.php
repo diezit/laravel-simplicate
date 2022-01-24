@@ -1,8 +1,8 @@
 <?php
 
-namespace Czim\Simplicate\Data\Employee;
+namespace CrixuAMG\Simplicate\Data\Employee;
 
-use Czim\Simplicate\Data\AbstractDataObject;
+use CrixuAMG\Simplicate\Data\AbstractDataObject;
 use Illuminate\Support\Arr;
 
 class EmployeeReference extends AbstractDataObject
@@ -26,24 +26,14 @@ class EmployeeReference extends AbstractDataObject
 
     public function __construct(array $data)
     {
-        $this->id       = Arr::get($data, 'id');
+        $this->id = Arr::get($data, 'id');
         $this->personId = Arr::get($data, 'person_id');
-        $this->name     = Arr::get($data, 'name');
-    }
-
-    public function getId(): ?string
-    {
-        return $this->id;
+        $this->name = Arr::get($data, 'name');
     }
 
     public function getPersonId(): ?string
     {
         return $this->personId;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
     }
 
     public function toArray(): array
@@ -58,6 +48,16 @@ class EmployeeReference extends AbstractDataObject
         }
 
         return $array;
+    }
+
+    public function getId(): ?string
+    {
+        return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
     }
 
 }

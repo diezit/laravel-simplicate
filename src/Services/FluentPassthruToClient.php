@@ -1,15 +1,15 @@
 <?php
 
-namespace Czim\Simplicate\Services;
+namespace CrixuAMG\Simplicate\Services;
 
-use Czim\Simplicate\Contracts\Services\SimplicateClientInterface;
-use Czim\Simplicate\Contracts\Services\SimplicateDomainInterface;
+use CrixuAMG\Simplicate\Contracts\Services\SimplicateClientInterface;
+use CrixuAMG\Simplicate\Contracts\Services\SimplicateDomainInterface;
 
 trait FluentPassthruToClient
 {
 
     /**
-     * @param int $offset
+     * @param  int  $offset
      * @return SimplicateDomainInterface|$this
      */
     public function offset(int $offset)
@@ -20,7 +20,7 @@ trait FluentPassthruToClient
     }
 
     /**
-     * @param int $limit
+     * @param  int  $limit
      * @return SimplicateDomainInterface|$this
      */
     public function limit(int $limit)
@@ -31,7 +31,7 @@ trait FluentPassthruToClient
     }
 
     /**
-     * @param array $filter
+     * @param  array  $filter
      * @return SimplicateDomainInterface|$this
      */
     public function filter(array $filter)
@@ -42,7 +42,7 @@ trait FluentPassthruToClient
     }
 
     /**
-     * @param string $sort
+     * @param  string  $sort
      * @return SimplicateDomainInterface|$this
      */
     public function sort(string $sort)

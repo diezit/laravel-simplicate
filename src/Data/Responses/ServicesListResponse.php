@@ -1,8 +1,8 @@
 <?php
 
-namespace Czim\Simplicate\Data\Responses;
+namespace CrixuAMG\Simplicate\Data\Responses;
 
-use Czim\Simplicate\Data\Project\Service;
+use CrixuAMG\Simplicate\Data\Project\Service;
 use Illuminate\Support\Collection;
 
 /**

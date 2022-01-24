@@ -1,8 +1,8 @@
 <?php
 
-namespace Czim\Simplicate\Data\Employee;
+namespace CrixuAMG\Simplicate\Data\Employee;
 
-use Czim\Simplicate\Data\AbstractDataObject;
+use CrixuAMG\Simplicate\Data\AbstractDataObject;
 use Illuminate\Support\Arr;
 
 class Avatar extends AbstractDataObject
@@ -34,9 +34,18 @@ class Avatar extends AbstractDataObject
         $this->urlSmall = Arr::get($data, 'url_small');
         $this->urlLarge = Arr::get($data, 'url_large');
         $this->initials = Arr::get($data, 'initials');
-        $this->color    = Arr::get($data, 'color');
+        $this->color = Arr::get($data, 'color');
     }
 
+    public function toArray(): array
+    {
+        return [
+            'url_small' => $this->getUrlSmall(),
+            'url_large' => $this->getUrlLarge(),
+            'initials'  => $this->getInitials(),
+            'color'     => $this->getColor(),
+        ];
+    }
 
     public function getUrlSmall(): ?string
     {
@@ -56,16 +65,6 @@ class Avatar extends AbstractDataObject
     public function getColor(): string
     {
         return $this->color;
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'url_small' => $this->getUrlSmall(),
-            'url_large' => $this->getUrlLarge(),
-            'initials'  => $this->getInitials(),
-            'color'     => $this->getColor(),
-        ];
     }
 
 }

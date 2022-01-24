@@ -1,9 +1,9 @@
 <?php
 
-namespace Czim\Simplicate\Services;
+namespace CrixuAMG\Simplicate\Services;
 
-use Czim\Simplicate\Contracts\Data\SimplicateResponseInterface;
-use Czim\Simplicate\Contracts\Services\SimplicateClientInterface;
+use CrixuAMG\Simplicate\Contracts\Data\SimplicateResponseInterface;
+use CrixuAMG\Simplicate\Contracts\Services\SimplicateClientInterface;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Arr;
@@ -73,14 +73,14 @@ class SimplicateClient implements SimplicateClientInterface
 
     public function setAuthentication(string $key, string $secret): SimplicateClientInterface
     {
-        $this->authenticationKey    = $key;
+        $this->authenticationKey = $key;
         $this->authenticationSecret = $secret;
 
         return $this;
     }
 
     /**
-     * @param int $offset
+     * @param  int  $offset
      * @return $this
      */
     public function offset(int $offset): SimplicateClientInterface
@@ -91,7 +91,7 @@ class SimplicateClient implements SimplicateClientInterface
     }
 
     /**
-     * @param int $limit
+     * @param  int  $limit
      * @return $this
      */
     public function limit(int $limit): SimplicateClientInterface
@@ -102,7 +102,7 @@ class SimplicateClient implements SimplicateClientInterface
     }
 
     /**
-     * @param array $filter
+     * @param  array  $filter
      * @return $this
      */
     public function filter(array $filter): SimplicateClientInterface
@@ -113,7 +113,7 @@ class SimplicateClient implements SimplicateClientInterface
     }
 
     /**
-     * @param string $sort
+     * @param  string  $sort
      * @return $this
      */
     public function sort(string $sort): SimplicateClientInterface
@@ -122,7 +122,7 @@ class SimplicateClient implements SimplicateClientInterface
 
         if (starts_with($sort, '-')) {
             $this->sortDescending = true;
-            $this->sort           = substr($sort, 1);
+            $this->sort = substr($sort, 1);
         }
 
         return $this;
@@ -144,33 +144,6 @@ class SimplicateClient implements SimplicateClientInterface
     {
         return $this->call('GET', $path);
     }
-
-    public function post(string $path, array $body): SimplicateResponseInterface
-    {
-        return $this->call('POST', $path, $body);
-    }
-
-    public function put(string $path, array $body): SimplicateResponseInterface
-    {
-        return $this->call('PUT', $path, $body);
-    }
-
-    public function delete(string $path): SimplicateResponseInterface
-    {
-        return $this->call('DELETE', $path);
-    }
-
-    /**
-     * @param string $class
-     * @return $this
-     */
-    public function responseClass(string $class): SimplicateClientInterface
-    {
-        $this->responseClass = $class;
-
-        return $this;
-    }
-
 
     protected function call(string $method, $path, array $body = null)
     {
@@ -201,7 +174,7 @@ class SimplicateClient implements SimplicateClientInterface
 
             $this->resetFluentState();
 
-            throw new \Exception('Service error ' . $statusCode);
+            throw new \Exception('Service error '.$statusCode);
         }
 
         if ($this->responseClass === null) {
@@ -214,6 +187,22 @@ class SimplicateClient implements SimplicateClientInterface
         $this->resetFluentState();
 
         return $this->makeResponse($response);
+    }
+
+    /**
+     * Adds authentication key and secret to the guzzle options, where possible.
+     *
+     * @param  array  $options
+     * @return array
+     */
+    protected function addAuthenticationToOptions(array $options): array
+    {
+        if (null !== $this->authenticationKey && null !== $this->authenticationSecret) {
+            Arr::set($options, 'headers.Authentication-Key', $this->authenticationKey);
+            Arr::set($options, 'aheaders.Authentication-Secret', $this->authenticationSecret);
+        }
+
+        return $options;
     }
 
     protected function collectQueryParameters(): array
@@ -229,14 +218,27 @@ class SimplicateClient implements SimplicateClientInterface
         }
 
         if ($this->sort) {
-            $query['sort'] = ($this->sortDescending ? '-' : '') . $this->sort;
+            $query['sort'] = ($this->sortDescending ? '-' : '').$this->sort;
         }
 
-        if ( ! empty($this->filter)) {
+        if (!empty($this->filter)) {
             $query['q'] = $this->filter;
         }
 
         return $query;
+    }
+
+    /**
+     * Resets the fluent-set state in preparation for the next call.
+     */
+    protected function resetFluentState(): void
+    {
+        $this->offset = 0;
+        $this->limit = null;
+        $this->filter = [];
+        $this->sort = null;
+        $this->sortDescending = false;
+        $this->options = [];
     }
 
     protected function makeResponse(ResponseInterface $response): SimplicateResponseInterface
@@ -254,39 +256,36 @@ class SimplicateClient implements SimplicateClientInterface
         $class = $this->responseClass;
 
         return new $class(
-            Arr::get($responseArray,'data'),
-            Arr::get($responseArray,'errors'),
-            Arr::get($responseArray,'debug')
+            Arr::get($responseArray, 'data'),
+            Arr::get($responseArray, 'errors'),
+            Arr::get($responseArray, 'debug')
         );
     }
 
-    /**
-     * Adds authentication key and secret to the guzzle options, where possible.
-     *
-     * @param array $options
-     * @return array
-     */
-    protected function addAuthenticationToOptions(array $options): array
+    public function post(string $path, array $body): SimplicateResponseInterface
     {
-        if (null !== $this->authenticationKey && null !== $this->authenticationSecret) {
-            Arr::set($options, 'headers.Authentication-Key', $this->authenticationKey);
-            Arr::set($options, 'aheaders.Authentication-Secret', $this->authenticationSecret);
-        }
+        return $this->call('POST', $path, $body);
+    }
 
-        return $options;
+    public function put(string $path, array $body): SimplicateResponseInterface
+    {
+        return $this->call('PUT', $path, $body);
+    }
+
+    public function delete(string $path): SimplicateResponseInterface
+    {
+        return $this->call('DELETE', $path);
     }
 
     /**
-     * Resets the fluent-set state in preparation for the next call.
+     * @param  string  $class
+     * @return $this
      */
-    protected function resetFluentState(): void
+    public function responseClass(string $class): SimplicateClientInterface
     {
-        $this->offset         = 0;
-        $this->limit          = null;
-        $this->filter         = [];
-        $this->sort           = null;
-        $this->sortDescending = false;
-        $this->options        = [];
+        $this->responseClass = $class;
+
+        return $this;
     }
 
 }

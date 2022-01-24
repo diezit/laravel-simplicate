@@ -1,8 +1,8 @@
 <?php
 
-namespace Czim\Simplicate\Data\Service;
+namespace CrixuAMG\Simplicate\Data\Service;
 
-use Czim\Simplicate\Data\AbstractDataObject;
+use CrixuAMG\Simplicate\Data\AbstractDataObject;
 use Illuminate\Support\Arr;
 
 class ServiceReference extends AbstractDataObject
@@ -31,12 +31,23 @@ class ServiceReference extends AbstractDataObject
 
     public function __construct(array $data)
     {
-        $this->id               = Arr::get($data, 'id');
-        $this->name             = Arr::get($data, 'name');
+        $this->id = Arr::get($data, 'id');
+        $this->name = Arr::get($data, 'name');
         $this->defaultServiceId = Arr::get($data, 'default_service_id');
-        $this->revenueGroupId   = Arr::get($data, 'revenue_group_id');
+        $this->revenueGroupId = Arr::get($data, 'revenue_group_id');
     }
 
+    public function toArray(): array
+    {
+        $array = [
+            'id'                 => $this->getId(),
+            'name'               => $this->getName(),
+            'default_service_id' => $this->getDefaultServiceId(),
+            'revenue_group_id'   => $this->getRevenueGroupId(),
+        ];
+
+        return $array;
+    }
 
     public function getId(): ?string
     {
@@ -56,18 +67,6 @@ class ServiceReference extends AbstractDataObject
     public function getRevenueGroupId(): ?string
     {
         return $this->revenueGroupId;
-    }
-
-    public function toArray(): array
-    {
-        $array = [
-            'id'                 => $this->getId(),
-            'name'               => $this->getName(),
-            'default_service_id' => $this->getDefaultServiceId(),
-            'revenue_group_id'   => $this->getRevenueGroupId(),
-        ];
-
-        return $array;
     }
 
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Czim\Simplicate\Data\Responses;
+namespace CrixuAMG\Simplicate\Data\Responses;
 
-use Czim\Simplicate\Data\Hours\Hours;
+use CrixuAMG\Simplicate\Data\Hours\Hours;
 
 /**
  * Class HoursSingleResponse

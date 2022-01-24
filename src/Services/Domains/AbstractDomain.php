@@ -1,10 +1,10 @@
 <?php
 
-namespace Czim\Simplicate\Services\Domains;
+namespace CrixuAMG\Simplicate\Services\Domains;
 
-use Czim\Simplicate\Contracts\Services\SimplicateClientInterface;
-use Czim\Simplicate\Contracts\Services\SimplicateDomainInterface;
-use Czim\Simplicate\Services\FluentPassthruToClient;
+use CrixuAMG\Simplicate\Contracts\Services\SimplicateClientInterface;
+use CrixuAMG\Simplicate\Contracts\Services\SimplicateDomainInterface;
+use CrixuAMG\Simplicate\Services\FluentPassthruToClient;
 
 abstract class AbstractDomain implements SimplicateDomainInterface
 {
@@ -35,7 +35,7 @@ abstract class AbstractDomain implements SimplicateDomainInterface
 
     protected function prefixPath(string $path): string
     {
-        return $this->path() . '/' . $path;
+        return $this->path().'/'.$path;
     }
 
 }

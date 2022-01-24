@@ -1,22 +1,22 @@
 <?php
 
-namespace Czim\Simplicate\Contracts\Services\Domains;
+namespace CrixuAMG\Simplicate\Contracts\Services\Domains;
 
-use Czim\Simplicate\Contracts\Services\SimplicateDomainInterface;
-use Czim\Simplicate\Data\Responses\EmployeeListResponse;
-use Czim\Simplicate\Data\Responses\EmployeeSingleResponse;
-use Czim\Simplicate\Data\Responses\EmployeeTypeListResponse;
-use Czim\Simplicate\Data\Responses\EmployeeTypeSingleResponse;
-use Czim\Simplicate\Data\Responses\EmploymentTypeListResponse;
-use Czim\Simplicate\Data\Responses\EmploymentTypeSingleResponse;
-use Czim\Simplicate\Data\Responses\LeaveBalanceListResponse;
-use Czim\Simplicate\Data\Responses\LeaveListResponse;
-use Czim\Simplicate\Data\Responses\LeaveSingleResponse;
-use Czim\Simplicate\Data\Responses\LeaveTypeListResponse;
-use Czim\Simplicate\Data\Responses\LeaveTypeSingleResponse;
-use Czim\Simplicate\Data\Responses\TeamListResponse;
-use Czim\Simplicate\Data\Responses\TeamSingleResponse;
-use Czim\Simplicate\Data\Responses\TimeTableListResponse;
+use CrixuAMG\Simplicate\Contracts\Services\SimplicateDomainInterface;
+use CrixuAMG\Simplicate\Data\Responses\EmployeeListResponse;
+use CrixuAMG\Simplicate\Data\Responses\EmployeeSingleResponse;
+use CrixuAMG\Simplicate\Data\Responses\EmployeeTypeListResponse;
+use CrixuAMG\Simplicate\Data\Responses\EmployeeTypeSingleResponse;
+use CrixuAMG\Simplicate\Data\Responses\EmploymentTypeListResponse;
+use CrixuAMG\Simplicate\Data\Responses\EmploymentTypeSingleResponse;
+use CrixuAMG\Simplicate\Data\Responses\LeaveBalanceListResponse;
+use CrixuAMG\Simplicate\Data\Responses\LeaveListResponse;
+use CrixuAMG\Simplicate\Data\Responses\LeaveSingleResponse;
+use CrixuAMG\Simplicate\Data\Responses\LeaveTypeListResponse;
+use CrixuAMG\Simplicate\Data\Responses\LeaveTypeSingleResponse;
+use CrixuAMG\Simplicate\Data\Responses\TeamListResponse;
+use CrixuAMG\Simplicate\Data\Responses\TeamSingleResponse;
+use CrixuAMG\Simplicate\Data\Responses\TimeTableListResponse;
 
 interface HrmDomainInterface extends SimplicateDomainInterface
 {
@@ -48,5 +48,5 @@ interface HrmDomainInterface extends SimplicateDomainInterface
     public function team(string $id): TeamSingleResponse;
 
     public function timeTables(): TimeTableListResponse;
-    
+
 }

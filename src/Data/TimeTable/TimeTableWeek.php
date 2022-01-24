@@ -1,20 +1,20 @@
 <?php
 
-namespace Czim\Simplicate\Data\TimeTable;
+namespace CrixuAMG\Simplicate\Data\TimeTable;
 
-use Czim\Simplicate\Data\AbstractDataObject;
+use CrixuAMG\Simplicate\Data\AbstractDataObject;
 use Illuminate\Support\Arr;
 
 class TimeTableWeek extends AbstractDataObject
 {
 
-    const MONDAY    = 1;
-    const TUESDAY   = 2;
+    const MONDAY = 1;
+    const TUESDAY = 2;
     const WEDNESDAY = 3;
-    const THURSDAY  = 4;
-    const FRIDAY    = 5;
-    const SATURDAY  = 6;
-    const SUNDAY    = 7;
+    const THURSDAY = 4;
+    const FRIDAY = 5;
+    const SATURDAY = 6;
+    const SUNDAY = 7;
 
 
     /**
@@ -69,16 +69,6 @@ class TimeTableWeek extends AbstractDataObject
         return $this->days[6];
     }
 
-    public function getDay(int $number): TimeTableDay
-    {
-        if ($number < 1 || $number > 7) {
-            throw new \InvalidArgumentException('Number must be 1-7');
-        }
-
-        return $this->days[ $number - 1 ];
-    }
-
-
     public function toArray(): array
     {
         return [
@@ -90,6 +80,15 @@ class TimeTableWeek extends AbstractDataObject
             'day_6' => $this->getDay(6),
             'day_7' => $this->getDay(7),
         ];
+    }
+
+    public function getDay(int $number): TimeTableDay
+    {
+        if ($number < 1 || $number > 7) {
+            throw new \InvalidArgumentException('Number must be 1-7');
+        }
+
+        return $this->days[$number - 1];
     }
 
 }

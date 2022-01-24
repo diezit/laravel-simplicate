@@ -1,8 +1,8 @@
 <?php
 
-namespace Czim\Simplicate\Data\Responses;
+namespace CrixuAMG\Simplicate\Data\Responses;
 
-use Czim\Simplicate\Data\TimeTable\TimeTable;
+use CrixuAMG\Simplicate\Data\TimeTable\TimeTable;
 use Illuminate\Support\Collection;
 
 /**

@@ -1,8 +1,8 @@
 <?php
 
-namespace Czim\Simplicate\Data\Leave;
+namespace CrixuAMG\Simplicate\Data\Leave;
 
-use Czim\Simplicate\Data\AbstractDataObject;
+use CrixuAMG\Simplicate\Data\AbstractDataObject;
 use Illuminate\Support\Arr;
 
 class LeaveTypeReference extends AbstractDataObject
@@ -26,9 +26,23 @@ class LeaveTypeReference extends AbstractDataObject
 
     public function __construct(array $data)
     {
-        $this->id             = Arr::get($data, 'id');
-        $this->label          = Arr::get($data, 'label');
+        $this->id = Arr::get($data, 'id');
+        $this->label = Arr::get($data, 'label');
         $this->affectsBalance = Arr::get($data, 'affects_balance');
+    }
+
+    public function toArray(): array
+    {
+        $array = [
+            'id'    => $this->getId(),
+            'label' => $this->getLabel(),
+        ];
+
+        if ($this->getAffectsBalance() !== null) {
+            $array['affects_balance'] = $this->getAffectsBalance();
+        }
+
+        return $array;
     }
 
     public function getId(): string
@@ -44,20 +58,6 @@ class LeaveTypeReference extends AbstractDataObject
     public function getAffectsBalance(): ?bool
     {
         return $this->affectsBalance;
-    }
-
-    public function toArray(): array
-    {
-        $array = [
-            'id'    => $this->getId(),
-            'label' => $this->getLabel(),
-        ];
-
-        if ($this->getAffectsBalance() !== null) {
-            $array['affects_balance'] = $this->getAffectsBalance();
-        }
-
-        return $array;
     }
 
 }

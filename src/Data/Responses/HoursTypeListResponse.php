@@ -1,8 +1,8 @@
 <?php
 
-namespace Czim\Simplicate\Data\Responses;
+namespace CrixuAMG\Simplicate\Data\Responses;
 
-use Czim\Simplicate\Data\Hours\Type;
+use CrixuAMG\Simplicate\Data\Hours\Type;
 use Illuminate\Support\Collection;
 
 /**

@@ -1,8 +1,8 @@
 <?php
 
-namespace Czim\Simplicate\Data\Responses;
+namespace CrixuAMG\Simplicate\Data\Responses;
 
-use Czim\Simplicate\Data\Leave\LeaveBalance;
+use CrixuAMG\Simplicate\Data\Leave\LeaveBalance;
 use Illuminate\Support\Collection;
 
 /**

@@ -1,8 +1,8 @@
 <?php
 
-namespace Czim\Simplicate\Data\Hours;
+namespace CrixuAMG\Simplicate\Data\Hours;
 
-use Czim\Simplicate\Data\AbstractDataObject;
+use CrixuAMG\Simplicate\Data\AbstractDataObject;
 use Illuminate\Support\Arr;
 
 class VatClass extends AbstractDataObject
@@ -26,11 +26,19 @@ class VatClass extends AbstractDataObject
 
     public function __construct(array $data)
     {
-        $this->id         = Arr::get($data, 'id');
-        $this->label      = Arr::get($data, 'label');
+        $this->id = Arr::get($data, 'id');
+        $this->label = Arr::get($data, 'label');
         $this->percentage = Arr::get($data, 'percentage', 0);
     }
 
+    public function toArray(): array
+    {
+        return [
+            'id'         => $this->getId(),
+            'label'      => $this->getLabel(),
+            'percentage' => $this->getPercentage(),
+        ];
+    }
 
     public function getId(): string
     {
@@ -45,15 +53,6 @@ class VatClass extends AbstractDataObject
     public function getPercentage(): int
     {
         return $this->percentage;
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'id'         => $this->getId(),
-            'label'      => $this->getLabel(),
-            'percentage' => $this->getPercentage(),
-        ];
     }
 
 }
