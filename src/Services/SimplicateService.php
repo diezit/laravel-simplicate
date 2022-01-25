@@ -5,6 +5,7 @@ namespace CrixuAMG\Simplicate\Services;
 use CrixuAMG\Simplicate\Contracts\Services\Domains;
 use CrixuAMG\Simplicate\Contracts\Services\SimplicateClientInterface;
 use CrixuAMG\Simplicate\Contracts\Services\SimplicateServiceInterface;
+use CrixuAMG\Simplicate\Services\Domains\CrmDomain;
 use CrixuAMG\Simplicate\Services\Domains\HoursDomain;
 use CrixuAMG\Simplicate\Services\Domains\HrmDomain;
 use CrixuAMG\Simplicate\Services\Domains\ProjectsDomain;
@@ -30,6 +31,7 @@ class SimplicateService implements SimplicateServiceInterface
      * @var Domains\ProjectsDomainInterface
      */
     protected $projects;
+    protected $crm;
 
 
     public function __construct(SimplicateClientInterface $client)
@@ -39,6 +41,7 @@ class SimplicateService implements SimplicateServiceInterface
         $this->hours = new HoursDomain($client);
         $this->hrm = new HrmDomain($client);
         $this->projects = new ProjectsDomain($client);
+        $this->crm = new CrmDomain($client);
     }
 
 
@@ -57,6 +60,11 @@ class SimplicateService implements SimplicateServiceInterface
     public function hrm(): Domains\HrmDomainInterface
     {
         return $this->hrm;
+    }
+
+    public function crm(): Domains\CrmDomainInterface
+    {
+        return $this->crm;
     }
 
     public function projects(): Domains\ProjectsDomainInterface

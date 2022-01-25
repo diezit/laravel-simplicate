@@ -43,7 +43,6 @@ class CustomField extends AbstractDataObject
      */
     protected $options;
 
-
     public function __construct(array $data)
     {
         $this->id = Arr::get($data, 'id');
@@ -51,7 +50,7 @@ class CustomField extends AbstractDataObject
         $this->label = Arr::get($data, 'label');
         $this->renderType = Arr::get($data, 'render_type');
         $this->position = (int) Arr::get($data, 'position');
-        $this->valueType = Arr::get($data, 'valueType');
+        $this->valueType = Arr::get($data, 'value_type');
         $this->options = Arr::get($data, 'options', []);
     }
 
@@ -102,5 +101,4 @@ class CustomField extends AbstractDataObject
     {
         return $this->options;
     }
-
 }

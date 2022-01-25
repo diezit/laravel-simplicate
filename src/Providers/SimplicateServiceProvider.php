@@ -2,7 +2,9 @@
 
 namespace CrixuAMG\Simplicate\Providers;
 
+use CrixuAMG\Simplicate\Contracts\Services\SimplicateClientInterface;
 use CrixuAMG\Simplicate\Contracts\Services\SimplicateServiceInterface;
+use CrixuAMG\Simplicate\Services\SimplicateClient;
 use CrixuAMG\Simplicate\Services\SimplicateServiceFactory;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
@@ -37,6 +39,10 @@ class SimplicateServiceProvider extends ServiceProvider
      */
     protected function registerInterfaceBindings()
     {
+        $this->app->bind(SimplicateClientInterface::class, function ($app) {
+            /** @var Application $app */
+            return $app->make(SimplicateClient::class)->make();
+        });
         $this->app->bind(SimplicateServiceInterface::class, function ($app) {
             /** @var Application $app */
             return $app->make(SimplicateServiceFactory::class)->make();

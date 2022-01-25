@@ -7,6 +7,7 @@ use CrixuAMG\Simplicate\Contracts\Services\SimplicateClientInterface;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Psr\Http\Message\ResponseInterface;
 
 class SimplicateClient implements SimplicateClientInterface
@@ -119,7 +120,7 @@ class SimplicateClient implements SimplicateClientInterface
     {
         $this->sort = trim($sort);
 
-        if (starts_with($sort, '-')) {
+        if (Str::startsWith($sort, '-')) {
             $this->sortDescending = true;
             $this->sort = substr($sort, 1);
         }

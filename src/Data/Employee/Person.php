@@ -4,7 +4,9 @@ namespace CrixuAMG\Simplicate\Data\Employee;
 
 use Carbon\Carbon;
 use CrixuAMG\Simplicate\Data\AbstractDataObject;
+use CrixuAMG\Simplicate\Data\CustomField\CustomField;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 
 class Person extends AbstractDataObject
 {
@@ -45,7 +47,18 @@ class Person extends AbstractDataObject
      * @var string
      */
     protected $fullName;
-
+    /**
+     * @var array|\ArrayAccess|mixed
+     */
+    private $firstName;
+    /**
+     * @var array|\ArrayAccess|mixed
+     */
+    private $familyName;
+    /**
+     * @var array|\ArrayAccess|mixed
+     */
+    private $customFields;
 
     public function __construct(array $data)
     {
@@ -60,13 +73,22 @@ class Person extends AbstractDataObject
             }
         }
 
-
         $this->id = Arr::get($data, 'id');
         $this->dateOfBirth = $dateOfBirth ? new Carbon($dateOfBirth) : null;
         $this->genderId = Arr::get($data, 'gender_id');
         $this->gender = Arr::get($data, 'gender');
         $this->address = new Address(Arr::get($data, 'address', []));
         $this->fullName = Arr::get($data, 'full_name');
+        $this->firstName = Arr::get($data, 'first_name');
+        $this->familyName = Arr::get($data, 'family_name');
+        $this->customFields = new Collection(
+            array_map(
+                function (array $item) {
+                    return new CustomField($item);
+                },
+                Arr::get($data, 'custom_fields', [])
+            )
+        );
     }
 
     public function toArray(): array
@@ -84,6 +106,9 @@ class Person extends AbstractDataObject
             'gender'        => $this->getGender(),
             'address'       => $this->getAddress()->toArray(),
             'full_name'     => $this->getFullName(),
+            'first_name'    => $this->getFirstName(),
+            'family_name'   => $this->getFamilyName(),
+            'custom_fields' => $this->getCustomFields()->toArray(),
         ];
     }
 
@@ -102,7 +127,7 @@ class Person extends AbstractDataObject
         return $this->id;
     }
 
-    public function getGenderId(): string
+    public function getGenderId(): ?string
     {
         return $this->genderId;
     }
@@ -117,9 +142,32 @@ class Person extends AbstractDataObject
         return $this->address;
     }
 
-    public function getFullName(): string
+    public function getFullName(): ?string
     {
         return $this->fullName;
     }
 
+    /**
+     * @return array|\ArrayAccess|mixed
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @return array|\ArrayAccess|mixed
+     */
+    public function getFamilyName()
+    {
+        return $this->familyName;
+    }
+
+    /**
+     * @return array|\ArrayAccess|mixed
+     */
+    public function getCustomFields()
+    {
+        return $this->customFields;
+    }
 }
