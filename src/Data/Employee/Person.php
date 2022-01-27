@@ -10,7 +10,6 @@ use Illuminate\Support\Collection;
 
 class Person extends AbstractDataObject
 {
-
     /**
      * @var string
      */
@@ -59,13 +58,16 @@ class Person extends AbstractDataObject
      * @var array|\ArrayAccess|mixed
      */
     private $customFields;
+    /**
+     * @var array|\ArrayAccess|mixed
+     */
+    private $email;
 
     public function __construct(array $data)
     {
         $dateOfBirth = Arr::get($data, 'date_of_birth');
 
         if (is_string($dateOfBirth)) {
-
             if ($dateOfBirth == '0000-00-00') {
                 $dateOfBirth = null;
             } elseif (preg_match('#^-?0000(.*)$#', $dateOfBirth, $matches)) {
@@ -78,6 +80,7 @@ class Person extends AbstractDataObject
         $this->genderId = Arr::get($data, 'gender_id');
         $this->gender = Arr::get($data, 'gender');
         $this->address = new Address(Arr::get($data, 'address', []));
+        $this->email = Arr::get($data, 'email');
         $this->fullName = Arr::get($data, 'full_name');
         $this->firstName = Arr::get($data, 'first_name');
         $this->familyName = Arr::get($data, 'family_name');
@@ -169,5 +172,13 @@ class Person extends AbstractDataObject
     public function getCustomFields()
     {
         return $this->customFields;
+    }
+
+    /**
+     * @return array|\ArrayAccess|mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
     }
 }
