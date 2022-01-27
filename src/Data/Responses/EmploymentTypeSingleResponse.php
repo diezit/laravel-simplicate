@@ -2,6 +2,7 @@
 
 namespace CrixuAMG\Simplicate\Data\Responses;
 
+use CrixuAMG\Simplicate\Contracts\Data\SimplicateResponseInterface;
 use CrixuAMG\Simplicate\Data\Employee\EmploymentType;
 
 /**
@@ -9,7 +10,7 @@ use CrixuAMG\Simplicate\Data\Employee\EmploymentType;
  *
  * @method EmploymentType getData()
  */
-class EmploymentTypeSingleResponse extends AbstractDataResponse
+class EmploymentTypeSingleResponse extends AbstractDataResponse implements SimplicateResponseInterface
 {
 
     protected function setData($data)

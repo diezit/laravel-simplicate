@@ -3,6 +3,8 @@
 namespace CrixuAMG\Simplicate\Services\Domains;
 
 use CrixuAMG\Simplicate\Contracts\Services\Domains\CrmDomainInterface;
+use CrixuAMG\Simplicate\Data\Responses\OrganisationListResponse;
+use CrixuAMG\Simplicate\Data\Responses\OrganisationSingleResponse;
 use CrixuAMG\Simplicate\Data\Responses\PersonListResponse;
 use CrixuAMG\Simplicate\Data\Responses\PersonSingleResponse;
 use CrixuAMG\Simplicate\Data\Responses\ContactPersonListResponse;
@@ -37,5 +39,17 @@ class CrmDomain extends AbstractDomain implements CrmDomainInterface
     {
         return $this->client->responseClass(ContactPersonSingleResponse::class)
             ->get($this->prefixPath('contactperson/'.$id));
+    }
+
+    public function allOrganisations(): OrganisationListResponse
+    {
+        return $this->client->responseClass(OrganisationListResponse::class)
+            ->get($this->prefixPath('organisation'));
+    }
+
+    public function organisation(string $id): OrganisationSingleResponse
+    {
+        return $this->client->responseClass(OrganisationSingleResponse::class)
+            ->get($this->prefixPath('organisation/'.$id));
     }
 }

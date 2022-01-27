@@ -2,6 +2,7 @@
 
 namespace CrixuAMG\Simplicate\Data\Responses;
 
+use CrixuAMG\Simplicate\Contracts\Data\SimplicateResponseInterface;
 use CrixuAMG\Simplicate\Data\Leave\Leave;
 
 /**
@@ -9,7 +10,7 @@ use CrixuAMG\Simplicate\Data\Leave\Leave;
  *
  * @method Leave getData()
  */
-class LeaveSingleResponse extends AbstractDataResponse
+class LeaveSingleResponse extends AbstractDataResponse implements SimplicateResponseInterface
 {
 
     protected function setData($data)

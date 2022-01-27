@@ -5,6 +5,8 @@ namespace CrixuAMG\Simplicate\Contracts\Services\Domains;
 use CrixuAMG\Simplicate\Contracts\Services\SimplicateDomainInterface;
 use CrixuAMG\Simplicate\Data\Responses\ContactPersonListResponse;
 use CrixuAMG\Simplicate\Data\Responses\ContactPersonSingleResponse;
+use CrixuAMG\Simplicate\Data\Responses\OrganisationListResponse;
+use CrixuAMG\Simplicate\Data\Responses\OrganisationSingleResponse;
 use CrixuAMG\Simplicate\Data\Responses\PersonListResponse;
 use CrixuAMG\Simplicate\Data\Responses\PersonSingleResponse;
 
@@ -17,4 +19,8 @@ interface CrmDomainInterface extends SimplicateDomainInterface
     public function allContactPersons(): ContactPersonListResponse;
 
     public function contactPerson(string $id): ContactPersonSingleResponse;
+
+    public function allOrganisations(): OrganisationListResponse;
+
+    public function organisation(string $id): OrganisationSingleResponse;
 }

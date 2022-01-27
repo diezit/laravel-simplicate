@@ -2,6 +2,7 @@
 
 namespace CrixuAMG\Simplicate\Data\Responses;
 
+use CrixuAMG\Simplicate\Contracts\Data\SimplicateResponseInterface;
 use CrixuAMG\Simplicate\Data\Leave\LeaveBalance;
 use Illuminate\Support\Collection;
 
@@ -10,7 +11,7 @@ use Illuminate\Support\Collection;
  *
  * @method Collection|LeaveBalance[] getData()
  */
-class LeaveBalanceListResponse extends AbstractDataResponse
+class LeaveBalanceListResponse extends AbstractDataResponse implements SimplicateResponseInterface
 {
 
     protected function setData($data)

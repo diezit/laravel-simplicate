@@ -2,6 +2,7 @@
 
 namespace CrixuAMG\Simplicate\Data\Responses;
 
+use CrixuAMG\Simplicate\Contracts\Data\SimplicateResponseInterface;
 use CrixuAMG\Simplicate\Data\Crm\ContactPerson;
 
 /**
@@ -9,7 +10,7 @@ use CrixuAMG\Simplicate\Data\Crm\ContactPerson;
  *
  * @method ContactPerson() getData()
  */
-class ContactPersonSingleResponse extends AbstractDataResponse
+class ContactPersonSingleResponse extends AbstractDataResponse implements SimplicateResponseInterface
 {
     protected function setData($data)
     {

@@ -2,6 +2,7 @@
 
 namespace CrixuAMG\Simplicate\Data\Responses;
 
+use CrixuAMG\Simplicate\Contracts\Data\SimplicateResponseInterface;
 use CrixuAMG\Simplicate\Data\Employee\Team;
 use Illuminate\Support\Collection;
 
@@ -10,7 +11,7 @@ use Illuminate\Support\Collection;
  *
  * @method Collection|Team[] getData()
  */
-class TeamListResponse extends AbstractDataResponse
+class TeamListResponse extends AbstractDataResponse implements SimplicateResponseInterface
 {
 
     protected function setData($data)

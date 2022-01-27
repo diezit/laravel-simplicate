@@ -2,6 +2,7 @@
 
 namespace CrixuAMG\Simplicate\Data\Responses;
 
+use CrixuAMG\Simplicate\Contracts\Data\SimplicateResponseInterface;
 use CrixuAMG\Simplicate\Data\Hours\Hours;
 
 /**
@@ -9,7 +10,7 @@ use CrixuAMG\Simplicate\Data\Hours\Hours;
  *
  * @method Hours getData()
  */
-class HoursSingleResponse extends AbstractDataResponse
+class HoursSingleResponse extends AbstractDataResponse implements SimplicateResponseInterface
 {
 
     protected function setData($data)
