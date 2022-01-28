@@ -108,6 +108,7 @@ class Person extends AbstractDataObject
             'gender_id'     => $this->getGenderId(),
             'gender'        => $this->getGender(),
             'address'       => $this->getAddress()->toArray(),
+            'email'         => $this->getEmail(),
             'full_name'     => $this->getFullName(),
             'first_name'    => $this->getFirstName(),
             'family_name'   => $this->getFamilyName(),
