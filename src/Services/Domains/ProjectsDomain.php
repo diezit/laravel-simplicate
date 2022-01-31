@@ -4,6 +4,8 @@ namespace CrixuAMG\Simplicate\Services\Domains;
 
 use CrixuAMG\Simplicate\Contracts\Data\SimplicateResponseInterface;
 use CrixuAMG\Simplicate\Contracts\Services\Domains\ProjectsDomainInterface;
+use CrixuAMG\Simplicate\Data\Responses\ProjectSingleResponse;
+use CrixuAMG\Simplicate\Data\Responses\ProjectsListResponse;
 use CrixuAMG\Simplicate\Data\Responses\ServiceSingleResponse;
 use CrixuAMG\Simplicate\Data\Responses\ServicesListResponse;
 
@@ -34,5 +36,24 @@ class ProjectsDomain extends AbstractDomain implements ProjectsDomainInterface
     {
         return $this->client->responseClass(ServiceSingleResponse::class)
             ->get($this->prefixPath('service/'.$id));
+    }
+
+    /**
+     * @return SimplicateResponseInterface|ProjectsListResponse
+     */
+    public function allProjects(): ProjectsListResponse
+    {
+        return $this->client->responseClass(ProjectsListResponse::class)
+            ->get($this->prefixPath('projects'));
+    }
+
+    /**
+     * @param  string  $id
+     * @return SimplicateResponseInterface|ProjectSingleResponse
+     */
+    public function project(string $id): ProjectSingleResponse
+    {
+        return $this->client->responseClass(ProjectSingleResponse::class)
+            ->get($this->prefixPath('projects/'.$id));
     }
 }
