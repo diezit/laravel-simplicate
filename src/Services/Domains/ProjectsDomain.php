@@ -44,7 +44,7 @@ class ProjectsDomain extends AbstractDomain implements ProjectsDomainInterface
     public function allProjects(): ProjectsListResponse
     {
         return $this->client->responseClass(ProjectsListResponse::class)
-            ->get($this->prefixPath('projects'));
+            ->get($this->prefixPath('project'));
     }
 
     /**
@@ -54,6 +54,6 @@ class ProjectsDomain extends AbstractDomain implements ProjectsDomainInterface
     public function project(string $id): ProjectSingleResponse
     {
         return $this->client->responseClass(ProjectSingleResponse::class)
-            ->get($this->prefixPath('projects/'.$id));
+            ->get($this->prefixPath('project/'.$id));
     }
 }
