@@ -4,6 +4,8 @@ namespace CrixuAMG\Simplicate\Services\Domains;
 
 use CrixuAMG\Simplicate\Contracts\Data\SimplicateResponseInterface;
 use CrixuAMG\Simplicate\Contracts\Services\Domains\HoursDomainInterface;
+use CrixuAMG\Simplicate\Data\Responses\ApprovalsListResponse;
+use CrixuAMG\Simplicate\Data\Responses\ApprovalsSingleResponse;
 use CrixuAMG\Simplicate\Data\Responses\HoursListResponse;
 use CrixuAMG\Simplicate\Data\Responses\HoursSingleResponse;
 use CrixuAMG\Simplicate\Data\Responses\HoursTypeListResponse;
@@ -55,5 +57,24 @@ class HoursDomain extends AbstractDomain implements HoursDomainInterface
     {
         return $this->client->responseClass(HoursTypeSingleResponse::class)
             ->get($this->prefixPath('hourstype/'.$id));
+    }
+
+    /**
+     * @return SimplicateResponseInterface|ApprovalsListResponse
+     */
+    public function allApprovals(): ApprovalsListResponse
+    {
+        return $this->client->responseClass(ApprovalsListResponse::class)
+            ->get($this->prefixPath('approval'));
+    }
+
+    /**
+     * @param  string  $id
+     * @return SimplicateResponseInterface|ApprovalsSingleResponse
+     */
+    public function approval(string $id): ApprovalsSingleResponse
+    {
+        return $this->client->responseClass(ApprovalsSingleResponse::class)
+            ->get($this->prefixPath('approval/'.$id));
     }
 }
