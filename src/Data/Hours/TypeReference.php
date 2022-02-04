@@ -38,9 +38,9 @@ class TypeReference extends AbstractDataObject
     {
         $this->id = Arr::get($data, 'id');
         $this->type = Arr::get($data, 'type');
-        $this->vatClass = new VatClass(Arr::get($data, 'vatclass', []));
         $this->label = Arr::get($data, 'label');
         $this->tariff = Arr::has($data, 'tariff') ? (float) Arr::get($data, 'tariff') : null;
+        $this->vatClass = Arr::get($data, 'vatclass', []) ? new VatClass(Arr::get($data, 'vatclass', [])) : null;
     }
 
     public function toArray(): array
@@ -48,9 +48,9 @@ class TypeReference extends AbstractDataObject
         return [
             'id'       => $this->getId(),
             'type'     => $this->getType(),
-            'vatclass' => $this->getVatClass()->toArray(),
             'label'    => $this->getLabel(),
             'tariff'   => $this->getTariff(),
+            'vatclass' => $this->getVatClass() ? $this->getVatClass()->toArray() : null,
         ];
     }
 
