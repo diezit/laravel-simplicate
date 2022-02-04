@@ -3,6 +3,8 @@
 namespace CrixuAMG\Simplicate\Contracts\Services\Domains;
 
 use CrixuAMG\Simplicate\Contracts\Services\SimplicateDomainInterface;
+use CrixuAMG\Simplicate\Data\Responses\ApprovalsListResponse;
+use CrixuAMG\Simplicate\Data\Responses\ApprovalsSingleResponse;
 use CrixuAMG\Simplicate\Data\Responses\HoursListResponse;
 use CrixuAMG\Simplicate\Data\Responses\HoursSingleResponse;
 use CrixuAMG\Simplicate\Data\Responses\HoursTypeListResponse;
@@ -18,5 +20,9 @@ interface HoursDomainInterface extends SimplicateDomainInterface
     public function allHoursTypes(): HoursTypeListResponse;
 
     public function hoursType(string $id): HoursTypeSingleResponse;
+
+    public function allApprovals(): ApprovalsListResponse;
+
+    public function approval(string $id): ApprovalsSingleResponse;
 
 }
