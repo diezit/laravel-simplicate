@@ -64,7 +64,7 @@ class TypeReference extends AbstractDataObject
         return $this->type;
     }
 
-    public function getVatClass(): VatClass
+    public function getVatClass(): ?VatClass
     {
         return $this->vatClass;
     }
