@@ -62,6 +62,14 @@ class Person extends AbstractDataObject
      * @var array|\ArrayAccess|mixed
      */
     private $email;
+    /**
+     * @var string
+     */
+    private $phone;
+    /**
+     * @var string
+     */
+    private $initials;
 
     public function __construct(array $data)
     {
@@ -81,9 +89,11 @@ class Person extends AbstractDataObject
         $this->gender = Arr::get($data, 'gender');
         $this->address = new Address(Arr::get($data, 'address', []));
         $this->email = Arr::get($data, 'email');
+        $this->phone = Arr::get($data, 'phone');
         $this->fullName = Arr::get($data, 'full_name');
         $this->firstName = Arr::get($data, 'first_name');
         $this->familyName = Arr::get($data, 'family_name');
+        $this->initials = Arr::get($data, 'initials');
         $this->customFields = new Collection(
             array_map(
                 function (array $item) {
