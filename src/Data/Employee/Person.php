@@ -63,11 +63,11 @@ class Person extends AbstractDataObject
      */
     private $email;
     /**
-     * @var string
+     * @var null|string
      */
     private $phone;
     /**
-     * @var string
+     * @var null|string
      */
     private $initials;
 
@@ -162,17 +162,17 @@ class Person extends AbstractDataObject
     }
 
     /**
-     * @return array|\ArrayAccess|mixed
+     * @return string|null
      */
-    public function getFirstName()
+    public function getFirstName(): ?string
     {
         return $this->firstName;
     }
 
     /**
-     * @return array|\ArrayAccess|mixed
+     * @return string|null
      */
-    public function getFamilyName()
+    public function getFamilyName(): ?string
     {
         return $this->familyName;
     }
@@ -186,10 +186,28 @@ class Person extends AbstractDataObject
     }
 
     /**
-     * @return array|\ArrayAccess|mixed
+     * @return string|null
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getInitials(): ?string
+    {
+        return $this->initials;
+    }
+
+
 }
