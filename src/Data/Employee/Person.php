@@ -47,11 +47,11 @@ class Person extends AbstractDataObject
      */
     protected $fullName;
     /**
-     * @var array|\ArrayAccess|mixed
+     * @var string
      */
     private $firstName;
     /**
-     * @var array|\ArrayAccess|mixed
+     * @var string
      */
     private $familyName;
     /**
@@ -59,7 +59,7 @@ class Person extends AbstractDataObject
      */
     private $customFields;
     /**
-     * @var array|\ArrayAccess|mixed
+     * @var string
      */
     private $email;
     /**
