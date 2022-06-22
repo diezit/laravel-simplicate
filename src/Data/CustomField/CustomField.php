@@ -39,6 +39,11 @@ class CustomField extends AbstractDataObject
     protected $valueType;
 
     /**
+     * @var string
+     */
+    protected $value;
+
+    /**
      * @var array
      */
     protected $options;
@@ -51,6 +56,7 @@ class CustomField extends AbstractDataObject
         $this->renderType = Arr::get($data, 'render_type');
         $this->position = (int) Arr::get($data, 'position');
         $this->valueType = Arr::get($data, 'value_type');
+        $this->value = Arr::get($data, 'value');
         $this->options = Arr::get($data, 'options', []);
     }
 
@@ -63,6 +69,7 @@ class CustomField extends AbstractDataObject
             'render_type' => $this->getRenderType(),
             'position'    => $this->getPosition(),
             'value_type'  => $this->getValueType(),
+            'value'       => $this->getValue(),
             'options'     => $this->getOptions(),
         ];
     }
@@ -95,6 +102,11 @@ class CustomField extends AbstractDataObject
     public function getValueType(): string
     {
         return $this->valueType;
+    }
+
+    public function getValue(): ?string
+    {
+        return $this->value;
     }
 
     public function getOptions(): array
