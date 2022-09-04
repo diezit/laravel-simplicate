@@ -47,11 +47,11 @@ class Person extends AbstractDataObject
      */
     protected $fullName;
     /**
-     * @var array|\ArrayAccess|mixed
+     * @var string
      */
     private $firstName;
     /**
-     * @var array|\ArrayAccess|mixed
+     * @var string
      */
     private $familyName;
     /**
@@ -59,9 +59,17 @@ class Person extends AbstractDataObject
      */
     private $customFields;
     /**
-     * @var array|\ArrayAccess|mixed
+     * @var string
      */
     private $email;
+    /**
+     * @var null|string
+     */
+    private $phone;
+    /**
+     * @var null|string
+     */
+    private $initials;
 
     public function __construct(array $data)
     {
@@ -81,9 +89,11 @@ class Person extends AbstractDataObject
         $this->gender = Arr::get($data, 'gender');
         $this->address = new Address(Arr::get($data, 'address', []));
         $this->email = Arr::get($data, 'email');
+        $this->phone = Arr::get($data, 'phone');
         $this->fullName = Arr::get($data, 'full_name');
         $this->firstName = Arr::get($data, 'first_name');
         $this->familyName = Arr::get($data, 'family_name');
+        $this->initials = Arr::get($data, 'initials');
         $this->customFields = new Collection(
             array_map(
                 function (array $item) {
@@ -152,17 +162,17 @@ class Person extends AbstractDataObject
     }
 
     /**
-     * @return array|\ArrayAccess|mixed
+     * @return string|null
      */
-    public function getFirstName()
+    public function getFirstName(): ?string
     {
         return $this->firstName;
     }
 
     /**
-     * @return array|\ArrayAccess|mixed
+     * @return string|null
      */
-    public function getFamilyName()
+    public function getFamilyName(): ?string
     {
         return $this->familyName;
     }
@@ -176,10 +186,28 @@ class Person extends AbstractDataObject
     }
 
     /**
-     * @return array|\ArrayAccess|mixed
+     * @return string|null
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getInitials(): ?string
+    {
+        return $this->initials;
+    }
+
+
 }
