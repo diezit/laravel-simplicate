@@ -96,6 +96,11 @@ class Service extends AbstractDataObject
      */
     protected $trackCost;
 
+    /**
+     * @var float
+     */
+    protected float $price;
+
 
     public function __construct(array $data)
     {
@@ -121,6 +126,7 @@ class Service extends AbstractDataObject
         $this->amount = (float) Arr::get($data, 'amount');
         $this->trackHours = (bool) Arr::get($data, 'track_hours');
         $this->trackCost = (bool) Arr::get($data, 'track_cost');
+        $this->price = (float) Arr::get($data, 'price');
     }
 
     public function toArray(): array
@@ -143,6 +149,7 @@ class Service extends AbstractDataObject
             'amount'                  => $this->getAmount(),
             'track_hours'             => $this->isTrackHours(),
             'track_cost'              => $this->isTrackCost(),
+            'price'                   => $this->getPrice(),
         ];
     }
 
@@ -234,4 +241,8 @@ class Service extends AbstractDataObject
         return $this->trackCost;
     }
 
+    private function getPrice()
+    {
+        return $this->price;
+    }
 }
