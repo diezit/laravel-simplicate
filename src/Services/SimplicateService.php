@@ -44,6 +44,10 @@ class SimplicateService implements SimplicateServiceInterface
         $this->crm = new CrmDomain($client);
     }
 
+    public function getClient(): SimplicateClientInterface
+    {
+        return $this->client;
+    }
 
     public function setAuthentication(string $key, string $secret): SimplicateServiceInterface
     {
