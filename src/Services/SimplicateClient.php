@@ -150,7 +150,7 @@ class SimplicateClient implements SimplicateClientInterface
         $options = $this->addAuthenticationToOptions($this->options);
 
         if ($body !== null) {
-            $options['body'] = $body;
+            $options['form_params'] = $body;
         }
 
         $options['query'] = $this->collectQueryParameters();
