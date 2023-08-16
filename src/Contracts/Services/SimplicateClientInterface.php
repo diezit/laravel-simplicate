@@ -42,7 +42,7 @@ interface SimplicateClientInterface
 
     public function get(string $path);
 
-    public function post(string $path;
+    public function post(string $path, array $body);
 
     public function put(string $path, array $body);
 
