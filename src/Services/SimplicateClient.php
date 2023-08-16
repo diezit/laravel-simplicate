@@ -150,7 +150,7 @@ class SimplicateClient implements SimplicateClientInterface
         $options = $this->addAuthenticationToOptions($this->options);
 
         if ($body !== null) {
-            $options['form_params'] = $body;
+            $options['body'] = is_array($body) ? json_encode($body) : $body;
         }
 
         $options['query'] = $this->collectQueryParameters();
@@ -262,17 +262,17 @@ class SimplicateClient implements SimplicateClientInterface
         );
     }
 
-    public function post(string $path, array $body): SimplicateResponseInterface
+    public function post(string $path, array $body)
     {
         return $this->call('POST', $path, $body);
     }
 
-    public function put(string $path, array $body): SimplicateResponseInterface
+    public function put(string $path, array $body)
     {
         return $this->call('PUT', $path, $body);
     }
 
-    public function delete(string $path): SimplicateResponseInterface
+    public function delete(string $path)
     {
         return $this->call('DELETE', $path);
     }
