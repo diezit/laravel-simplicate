@@ -241,7 +241,7 @@ class Service extends AbstractDataObject
         return $this->trackCost;
     }
 
-    private function getPrice()
+    public function getPrice(): float
     {
         return $this->price;
     }
