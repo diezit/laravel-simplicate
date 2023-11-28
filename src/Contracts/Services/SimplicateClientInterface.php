@@ -40,13 +40,13 @@ interface SimplicateClientInterface
      */
     public function descending(): SimplicateClientInterface;
 
-    public function get(string $path): SimplicateResponseInterface;
+    public function get(string $path);
 
-    public function post(string $path, array $body): SimplicateResponseInterface;
+    public function post(string $path, array $body);
 
-    public function put(string $path, array $body): SimplicateResponseInterface;
+    public function put(string $path, array $body);
 
-    public function delete(string $path): SimplicateResponseInterface;
+    public function delete(string $path);
 
     /**
      * @param  string  $class
