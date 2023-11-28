@@ -72,6 +72,11 @@ class Service extends AbstractDataObject
     protected $startDate;
 
     /**
+     * @var Carbon|null
+     */
+    protected $endDate;
+
+    /**
      * @var string|null
      */
     protected $name;
@@ -80,6 +85,11 @@ class Service extends AbstractDataObject
      * @var string|null
      */
     protected $invoiceMethod;
+
+    /**
+     * @var string|null
+     */
+    protected $subscriptionCycle;
 
     /**
      * @var float
@@ -121,8 +131,10 @@ class Service extends AbstractDataObject
         $this->updatedAt = $this->castStringAsDate(Arr::get($data, 'updated_at'));
         $this->writeHoursStartDate = $this->castStringAsDate(Arr::get($data, 'write_hours_start_date'));
         $this->startDate = $this->castStringAsDate(Arr::get($data, 'start_date'));
+        $this->endDate = $this->castStringAsDate(Arr::get($data, 'end_date'));
         $this->name = Arr::get($data, 'name');
         $this->invoiceMethod = Arr::get($data, 'invoice_method');
+        $this->subscriptionCycle = Arr::get($data, 'subscription_cycle');
         $this->amount = (float) Arr::get($data, 'amount');
         $this->trackHours = (bool) Arr::get($data, 'track_hours');
         $this->trackCost = (bool) Arr::get($data, 'track_cost');
@@ -244,5 +256,15 @@ class Service extends AbstractDataObject
     public function getPrice(): float
     {
         return $this->price;
+    }
+
+    public function getSubscriptionCycle(): ?string
+    {
+        return $this->subscriptionCycle;
+    }
+
+    public function getEndDate(): ?Carbon
+    {
+        return $this->endDate;
     }
 }
