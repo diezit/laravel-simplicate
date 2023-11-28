@@ -4,6 +4,7 @@ namespace CrixuAMG\Simplicate\Data\Project;
 
 use CrixuAMG\Simplicate\Data\AbstractDataObject;
 use CrixuAMG\Simplicate\Data\CustomField\CustomField;
+use CrixuAMG\Simplicate\Data\Employee\EmployeeReference;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
@@ -26,6 +27,12 @@ class Project extends AbstractDataObject
      * @var OrganizationReference|null
      */
     protected $organization;
+
+    /**
+     * @var EmployeeReference|null
+     */
+    protected $projectManager;
+
     /**
      * @var Collection
      */
@@ -43,6 +50,7 @@ class Project extends AbstractDataObject
         $this->id = Arr::get($data, 'id');
         $this->name = Arr::get($data, 'name');
         $this->organization = new OrganizationReference(Arr::get($data, 'organization', []));
+        $this->projectManager = new EmployeeReference(Arr::get($data, 'project_manager', []));
         $this->projectStatus = new ProjectStatus(Arr::get($data, 'project_status'));
         $this->customFields = new Collection(
             array_map(
@@ -76,6 +84,10 @@ class Project extends AbstractDataObject
             $array['project_status'] = $this->getProjectStatus()->toArray();
         }
 
+        if ($this->getProjectManager()) {
+            $array['project_manager'] = $this->getProjectManager()->toArray();
+        }
+
         return $array;
     }
 
@@ -85,6 +97,14 @@ class Project extends AbstractDataObject
     public function getOrganization(): ?OrganizationReference
     {
         return $this->organization;
+    }
+
+    /**
+     * @return EmployeeReference|null
+     */
+    public function getProjectManager(): ?EmployeeReference
+    {
+        return $this->projectManager;
     }
 
     /**
