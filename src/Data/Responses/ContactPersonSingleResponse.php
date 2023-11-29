@@ -14,6 +14,6 @@ class ContactPersonSingleResponse extends AbstractDataResponse implements Simpli
 {
     protected function setData($data)
     {
-        $this->data = new ContactPerson($data);
+        $this->data = new ContactPerson($data[0] ?? []);
     }
 }
