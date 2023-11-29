@@ -4,6 +4,7 @@ namespace CrixuAMG\Simplicate\Data\Employee;
 
 use Carbon\Carbon;
 use CrixuAMG\Simplicate\Data\AbstractDataObject;
+use CrixuAMG\Simplicate\Data\Crm\Person;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 

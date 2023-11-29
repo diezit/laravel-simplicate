@@ -1,10 +1,11 @@
 <?php
 
-namespace CrixuAMG\Simplicate\Data\Employee;
+namespace CrixuAMG\Simplicate\Data\Crm;
 
 use Carbon\Carbon;
 use CrixuAMG\Simplicate\Data\AbstractDataObject;
 use CrixuAMG\Simplicate\Data\CustomField\CustomField;
+use CrixuAMG\Simplicate\Data\Employee\Address;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
